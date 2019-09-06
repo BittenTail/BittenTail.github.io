@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-06T01:47:22.096Z</updated>
+  <updated>2019-09-06T14:44:47.574Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>插入排序</title>
+    <link href="http://yoursite.com/2019/09/06/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/"/>
+    <id>http://yoursite.com/2019/09/06/插入排序/</id>
+    <published>2019-09-06T14:05:55.000Z</published>
+    <updated>2019-09-06T14:44:47.574Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="介绍："><a href="#介绍：" class="headerlink" title="介绍："></a>介绍：</h2><p>插入排序是将n个数的一个序列&lt;a1,a2,a3,…,an&gt;,经过插入排序算法将这n个数按序排列，输出满足a1&lt;a2&lt;a3&lt;…&lt;an。</p><a id="more"></a><h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>插入算法的工作方式如同人排序一手扑克牌。开始时，我们的左手为空并且桌子上的牌面向下。然后，我们每次从桌子上拿走一张牌并将它插入到左手中正确的位置。为了找到一张牌的正确位置，我们从右到左将它与已在手中的每张牌进行比较，并进行插入。拿在手上的牌总是排序好的，原来这些牌是桌子上牌堆中顶部的牌。</p><h2 id="算法图解："><a href="#算法图解：" class="headerlink" title="算法图解："></a>算法图解：</h2><h2 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;介绍：&quot;&gt;&lt;a href=&quot;#介绍：&quot; class=&quot;headerlink&quot; title=&quot;介绍：&quot;&gt;&lt;/a&gt;介绍：&lt;/h2&gt;&lt;p&gt;插入排序是将n个数的一个序列&amp;lt;a1,a2,a3,…,an&amp;gt;,经过插入排序算法将这n个数按序排列，输出满足a1&amp;lt;a2&amp;lt;a3&amp;lt;…&amp;lt;an。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="算法" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="排序算法" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="插入排序" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="《算法导论》" scheme="http://yoursite.com/tags/%E3%80%8A%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E3%80%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>我的第一篇博客</title>
