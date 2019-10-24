@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-22T03:02:14.544Z</updated>
+  <updated>2019-10-24T05:22:13.489Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux-链接</title>
+    <link href="http://yoursite.com/2019/10/24/Linux-%E9%93%BE%E6%8E%A5/"/>
+    <id>http://yoursite.com/2019/10/24/Linux-链接/</id>
+    <published>2019-10-24T03:05:59.000Z</published>
+    <updated>2019-10-24T05:22:13.489Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux链接"><a href="#Linux链接" class="headerlink" title="Linux链接"></a>Linux链接</h1><hr><h5 id="在Linux中链接分为两种，一种为硬链接（Hard-Link），另外一种为软链接（Symbolic-Link）或称为符号链接。默认情况下，ln命令产生硬链接。"><a href="#在Linux中链接分为两种，一种为硬链接（Hard-Link），另外一种为软链接（Symbolic-Link）或称为符号链接。默认情况下，ln命令产生硬链接。" class="headerlink" title="在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。"></a>在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。</h5><a id="more"></a><hr><h2 id="硬链接："><a href="#硬链接：" class="headerlink" title="硬链接："></a>硬链接：</h2><p>硬链接指通过索引节点来进行连接。在Linux的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号（Inode Index），它存储着文件重要参数信息，也就是元数据（metadata），比如创建时间、修改时间、文件大小、属主、归属的用户组（属组）、读写权数据所在block号等。<br>在Linux中，多个文件名指向同一索引节点是存在的。比如：A是B的硬链接（A和B均为文件名），则A的目录项中的inode节点号与B的目录项中的inode节点号相同，即一个inode节点对应两个不同的文件名，两个文件名指向同一个文件，A和B对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个。<br>硬链接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬链接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的链接。只删除一个链接并不影响索引节点本身和其他的链接，只有当最后一个链接被删除后，文件的数据块及目录的链接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬链接文件均被删除。</p><hr><h2 id="软链接："><a href="#软链接：" class="headerlink" title="软链接："></a>软链接：</h2><p>软链接（符号链接），类似于windows系统中的快捷方式。它实际上是一种特殊的文件。在符号链接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。比如：A是B的软链接（A和B都是文件名），A的目录项中的inode节点号与B的目录项中的inode节点号不相同，A和B指向的是两个不同的inode，继而指向两块不同的数据块。但是A的数据块中存放的只是B的路径名（可以根据这个找到B的目录项）。A和B之间是“主从”关系，如果B被删除了，A任然存在（因为两个是不同的文件），但指向的是一个无效的链接。</p><hr><h2 id="两者的特点"><a href="#两者的特点" class="headerlink" title="两者的特点"></a>两者的特点</h2><h3 id="软链接：-1"><a href="#软链接：-1" class="headerlink" title="软链接："></a>软链接：</h3><ul><li>1.软链接是存放另一个文件的路径的形式存在。</li><li>2.软链接可以跨文件系统，硬链接不行。</li><li>3.软链接可以对一个不存在的文件名进行链接，硬链接必须要有源文件。</li><li>4.软链接可以对目录进行链接。</li></ul><h3 id="硬链接：-1"><a href="#硬链接：-1" class="headerlink" title="硬链接："></a>硬链接：</h3><ul><li>1.硬链接，以文件副本的形式存在。但不占用实际空间。</li><li>2.不允许给目录创建硬链接。</li><li>3.硬链接只有在同一个文件系统中才能创建。</li><li>4.删除一个硬链接文件并不影响其他有相同inode号的文件。</li></ul><p><strong>不论是硬链接或软链接都不会将原本的档案复制一份，只会占用非常少量的磁盘空间。</strong></p><p>Linux系统可以用ln命令来创建链接文件。</p><h5 id="ln命令格式："><a href="#ln命令格式：" class="headerlink" title="ln命令格式："></a>ln命令格式：</h5><p><strong>ln [参数] [源文件或目录] [目标文件或目录]</strong>   </p><h6 id="主要参数："><a href="#主要参数：" class="headerlink" title="主要参数："></a>主要参数：</h6><ul><li>-i交互模式，文件存在则提示用户是否覆盖。</li><li>-s软链接（符号链接）</li><li>-d允许超级用户制作目录的硬链接</li><li>-b删除，覆盖以前建立的链接<ul><li>软链接（符号链接）：ln -s source target</li><li>硬链接（实体链接）：ln source target</li></ul></li></ul><hr><blockquote><p>songguojun:<a href="https://www.cnblogs.com/songgj/p/9115954.html" target="_blank" rel="noopener">https://www.cnblogs.com/songgj/p/9115954.html</a></p></blockquote><hr><h3 id="PS："><a href="#PS：" class="headerlink" title="PS："></a>PS：</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Linux链接&quot;&gt;&lt;a href=&quot;#Linux链接&quot; class=&quot;headerlink&quot; title=&quot;Linux链接&quot;&gt;&lt;/a&gt;Linux链接&lt;/h1&gt;&lt;hr&gt;&lt;h5 id=&quot;在Linux中链接分为两种，一种为硬链接（Hard-Link），另外一种为软链接（Symbolic-Link）或称为符号链接。默认情况下，ln命令产生硬链接。&quot;&gt;&lt;a href=&quot;#在Linux中链接分为两种，一种为硬链接（Hard-Link），另外一种为软链接（Symbolic-Link）或称为符号链接。默认情况下，ln命令产生硬链接。&quot; class=&quot;headerlink&quot; title=&quot;在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。&quot;&gt;&lt;/a&gt;在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。&lt;/h5&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux/"/>
+    
+      <category term="知识点" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux/%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="知识点" scheme="http://yoursite.com/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis初学</title>
