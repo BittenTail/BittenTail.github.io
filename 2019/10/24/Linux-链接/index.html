@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="BittenTail">
 <meta property="og:description" content="Linux链接在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-24T05:22:13.489Z">
+<meta property="og:updated_time" content="2019-10-24T08:56:25.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux-链接">
 <meta name="twitter:description" content="Linux链接在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。">
@@ -255,7 +255,7 @@
                 
               
 
-              <time title="创建时间：2019-10-24 11:05:59 / 修改时间：13:22:13" itemprop="dateCreated datePublished" datetime="2019-10-24T11:05:59+08:00">2019-10-24</time>
+              <time title="创建时间：2019-10-24 11:05:59 / 修改时间：16:56:25" itemprop="dateCreated datePublished" datetime="2019-10-24T11:05:59+08:00">2019-10-24</time>
             </span>
           
             
@@ -309,7 +309,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Linux链接"><a href="#Linux链接" class="headerlink" title="Linux链接"></a>Linux链接</h1><hr><h5 id="在Linux中链接分为两种，一种为硬链接（Hard-Link），另外一种为软链接（Symbolic-Link）或称为符号链接。默认情况下，ln命令产生硬链接。"><a href="#在Linux中链接分为两种，一种为硬链接（Hard-Link），另外一种为软链接（Symbolic-Link）或称为符号链接。默认情况下，ln命令产生硬链接。" class="headerlink" title="在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。"></a>在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。</h5><a id="more"></a>
+        <h1 id="Linux链接"><a href="#Linux链接" class="headerlink" title="Linux链接"></a>Linux链接</h1><p>在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。</p><a id="more"></a>
 <hr>
 <h2 id="硬链接："><a href="#硬链接：" class="headerlink" title="硬链接："></a>硬链接：</h2><p>硬链接指通过索引节点来进行连接。在Linux的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号（Inode Index），它存储着文件重要参数信息，也就是元数据（metadata），比如创建时间、修改时间、文件大小、属主、归属的用户组（属组）、读写权数据所在block号等。<br>在Linux中，多个文件名指向同一索引节点是存在的。比如：A是B的硬链接（A和B均为文件名），则A的目录项中的inode节点号与B的目录项中的inode节点号相同，即一个inode节点对应两个不同的文件名，两个文件名指向同一个文件，A和B对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个。<br>硬链接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬链接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的链接。只删除一个链接并不影响索引节点本身和其他的链接，只有当最后一个链接被删除后，文件的数据块及目录的链接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬链接文件均被删除。</p>
 <hr>
@@ -431,7 +431,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux链接"><span class="nav-number">1.</span> <span class="nav-text">Linux链接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在Linux中链接分为两种，一种为硬链接（Hard-Link），另外一种为软链接（Symbolic-Link）或称为符号链接。默认情况下，ln命令产生硬链接。"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬链接："><span class="nav-number">1.1.</span> <span class="nav-text">硬链接：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软链接："><span class="nav-number">1.2.</span> <span class="nav-text">软链接：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两者的特点"><span class="nav-number">1.3.</span> <span class="nav-text">两者的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软链接：-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">软链接：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬链接：-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">硬链接：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ln命令格式："><span class="nav-number">1.3.2.0.1.</span> <span class="nav-text">ln命令格式：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#主要参数："><span class="nav-number">1.3.2.0.1.1.</span> <span class="nav-text">主要参数：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PS："><span class="nav-number">1.3.3.</span> <span class="nav-text">PS：</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux链接"><span class="nav-number">1.</span> <span class="nav-text">Linux链接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬链接："><span class="nav-number">1.1.</span> <span class="nav-text">硬链接：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软链接："><span class="nav-number">1.2.</span> <span class="nav-text">软链接：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两者的特点"><span class="nav-number">1.3.</span> <span class="nav-text">两者的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软链接：-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">软链接：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬链接：-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">硬链接：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ln命令格式："><span class="nav-number">1.3.2.0.1.</span> <span class="nav-text">ln命令格式：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#主要参数："><span class="nav-number">1.3.2.0.1.1.</span> <span class="nav-text">主要参数：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PS："><span class="nav-number">1.3.3.</span> <span class="nav-text">PS：</span></a></li></ol></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
