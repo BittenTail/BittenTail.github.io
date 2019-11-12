@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="BittenTail">
 <meta property="og:description" content="查询SELECT（select）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-12T06:20:32.570Z">
+<meta property="og:updated_time" content="2019-11-12T10:01:10.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库查询语句-select">
 <meta name="twitter:description" content="查询SELECT（select）">
@@ -304,7 +304,7 @@
           
         <h3 id="查询SELECT（select）"><a href="#查询SELECT（select）" class="headerlink" title="查询SELECT（select）"></a>查询SELECT（select）</h3><a id="more"></a>
 <h4 id="1-为表起别名（建议不要起中文）"><a href="#1-为表起别名（建议不要起中文）" class="headerlink" title="1.为表起别名（建议不要起中文）"></a>1.为表起别名（建议不要起中文）</h4><pre><code>select * from 表名 as 别名  --》as可以省略
-select 表名.列名1 列名2 from 表名</code></pre><h4 id="2-查询全部列（-），制定列（列名），为列起别名as"><a href="#2-查询全部列（-），制定列（列名），为列起别名as" class="headerlink" title="2.查询全部列（*），制定列（列名），为列起别名as"></a>2.查询全部列（*），制定列（列名），为列起别名as</h4><h4 id="3-查询前n部分数据："><a href="#3-查询前n部分数据：" class="headerlink" title="3.查询前n部分数据："></a>3.查询前n部分数据：</h4><ul>
+select 表名.列名1 列名2 from 表名</code></pre><h4 id="2-查询全部列（-），指定列（列名），为列起别名as"><a href="#2-查询全部列（-），指定列（列名），为列起别名as" class="headerlink" title="2.查询全部列（*），指定列（列名），为列起别名as"></a>2.查询全部列（*），指定列（列名），为列起别名as</h4><h4 id="3-查询前n部分数据："><a href="#3-查询前n部分数据：" class="headerlink" title="3.查询前n部分数据："></a>3.查询前n部分数据：</h4><ul>
 <li><p>top n 列名：表示查看前n行</p>
 <pre><code>select top 1 * from 表名  --》查询第一行</code></pre></li>
 <li><p>top n percent 列名：表示查看前百分之n的数据</p>
@@ -346,10 +346,25 @@ inner join 表2 as 别名2 on 别名1.列1=别名2.列1</code></pre></li>
 </li>
 <li><p>完全外连接：full outer join，两表中完全匹配的数据，左表中特有的数据，右表中特有的数据。  </p>
 </li>
-<li><p>-<em>关键问题</em>：哪些表，关系</p>
-<h4 id="7-聚合函数：对数据进行合并。"><a href="#7-聚合函数：对数据进行合并。" class="headerlink" title="7.聚合函数：对数据进行合并。"></a>7.聚合函数：对数据进行合并。</h4></li>
+<li><p>-<em>关键问题</em>：哪些表行，关系</p>
+<h4 id="7-聚合函数：对数据进行合并。"><a href="#7-聚合函数：对数据进行合并。" class="headerlink" title="7.聚合函数：对数据进行合并。"></a>7.聚合函数：对数据进行<strong>合并</strong>。</h4></li>
 </ul>
-
+<p><strong>sum</strong>（求和） <strong>avg</strong>（平均） <strong>count</strong>（计数) <strong>max</strong>（最大） <strong>min</strong>（最小）<br><em>一般是对数字类型的列进行操作<br>一条查询中可以同时写多个聚合函数，但是不能与普通列混写<br>聚合中的null问题：不参与计算</em>  </p>
+<pre><code>select COUNT（*） as count from 表名
+（where 列名=条件）</code></pre><h4 id="8-开窗函数"><a href="#8-开窗函数" class="headerlink" title="8.开窗函数"></a>8.开窗函数</h4><p><strong>over（）</strong><br><em>将统计出来的数据分布到原表的每一行中<br>结合聚合函数、排名函数使用</em></p>
+<pre><code>--将统计信息分布到每一行中去
+select * avg(列名） over（）
+from 表名</code></pre><h4 id="9-分组"><a href="#9-分组" class="headerlink" title="9.分组"></a>9.分组</h4><p>group by 列名1 列名2…<br><em>聚合函数一般结合分组使用，进行分组内的数据进行统计<br>根据指定列进行分组<br>分组后条件筛选：having…</em></p>
+<pre><code>--统计男女生人数
+select 列名1 count（*）   --》只能显示分组那一列
+from 表名
+where 列名1=条件   --》where语句写在分组前
+group by 列名1  --》可以进行多级分组，只需在后面加“,列名2...”
+having count（*）&gt;条件  --》对分组之后的数据进行筛选</code></pre><h3 id="总结：完整的select语句及执行顺序"><a href="#总结：完整的select语句及执行顺序" class="headerlink" title="总结：完整的select语句及执行顺序"></a>总结：完整的select语句及执行顺序</h3><pre><code>select distinct top n *
+from 表名1 join 表名2 on...join..表名n..
+where ...
+group by...having...
+oder by...</code></pre>
       
     </div>
     
@@ -360,7 +375,7 @@ inner join 表2 as 别名2 on 别名1.列1=别名2.列1</code></pre></li>
         <p><span>本文标题:</span><a  href="/2019/11/11/数据库查询语句-select/">数据库查询语句-select</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 BittenTail 的个人博客">BittenTail</a></p>
         <p><span>发布时间:</span>2019年11月11日 - 15时50分</p>
-        <p><span>最后更新:</span>2019年11月12日 - 14时20分</p>
+        <p><span>最后更新:</span>2019年11月12日 - 18时01分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/11/11/数据库查询语句-select/" title="数据库查询语句-select">http://yoursite.com/2019/11/11/数据库查询语句-select/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/11/数据库查询语句-select/　　作者: BittenTail" title=""></span>
@@ -388,7 +403,7 @@ inner join 表2 as 别名2 on 别名1.列1=别名2.列1</code></pre></li>
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#查询SELECT（select）"><span class="toc-number">1.</span> <span class="toc-text">查询SELECT（select）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-为表起别名（建议不要起中文）"><span class="toc-number">1.1.</span> <span class="toc-text">1.为表起别名（建议不要起中文）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-查询全部列（-），制定列（列名），为列起别名as"><span class="toc-number">1.2.</span> <span class="toc-text">2.查询全部列（*），制定列（列名），为列起别名as</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-查询前n部分数据："><span class="toc-number">1.3.</span> <span class="toc-text">3.查询前n部分数据：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-排序：order-by-列名1-asc-desc，列名1-asc-desc、、、-asc-升序-desc-降序"><span class="toc-number">1.4.</span> <span class="toc-text">4.排序：order by 列名1 asc|desc，列名1 asc|desc、、、(asc-升序|desc-降序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-条件查询：写在where后面"><span class="toc-number">1.5.</span> <span class="toc-text">5.条件查询：写在where后面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-连接：join-表名-on-关联条件（连接查询：当需要的结果从多张表中取时）"><span class="toc-number">1.6.</span> <span class="toc-text">6.连接：join 表名 on 关联条件（连接查询：当需要的结果从多张表中取时）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-聚合函数：对数据进行合并。"><span class="toc-number">1.7.</span> <span class="toc-text">7.聚合函数：对数据进行合并。</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#查询SELECT（select）"><span class="toc-number">1.</span> <span class="toc-text">查询SELECT（select）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-为表起别名（建议不要起中文）"><span class="toc-number">1.1.</span> <span class="toc-text">1.为表起别名（建议不要起中文）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-查询全部列（-），指定列（列名），为列起别名as"><span class="toc-number">1.2.</span> <span class="toc-text">2.查询全部列（*），指定列（列名），为列起别名as</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-查询前n部分数据："><span class="toc-number">1.3.</span> <span class="toc-text">3.查询前n部分数据：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-排序：order-by-列名1-asc-desc，列名1-asc-desc、、、-asc-升序-desc-降序"><span class="toc-number">1.4.</span> <span class="toc-text">4.排序：order by 列名1 asc|desc，列名1 asc|desc、、、(asc-升序|desc-降序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-条件查询：写在where后面"><span class="toc-number">1.5.</span> <span class="toc-text">5.条件查询：写在where后面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-连接：join-表名-on-关联条件（连接查询：当需要的结果从多张表中取时）"><span class="toc-number">1.6.</span> <span class="toc-text">6.连接：join 表名 on 关联条件（连接查询：当需要的结果从多张表中取时）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-聚合函数：对数据进行合并。"><span class="toc-number">1.7.</span> <span class="toc-text">7.聚合函数：对数据进行合并。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-开窗函数"><span class="toc-number">1.8.</span> <span class="toc-text">8.开窗函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-分组"><span class="toc-number">1.9.</span> <span class="toc-text">9.分组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结：完整的select语句及执行顺序"><span class="toc-number">2.</span> <span class="toc-text">总结：完整的select语句及执行顺序</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
