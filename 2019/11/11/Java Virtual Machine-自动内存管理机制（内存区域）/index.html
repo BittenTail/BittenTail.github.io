@@ -9,18 +9,18 @@
   
   <title>Java Virtual Machine-自动内存管理机制（内存区域） | BittenTail</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一 概述与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为new的每一个对象都去写向对应的delect/free，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。 二 Java运行时数据区   由线程共享的数据区 线程隔离的数据区    方法区（Met">
+  <meta name="description" content="概述与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为new的每一个对象都去写向对应的delect/free，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。">
 <meta name="keywords" content="学习笔记,JVM,内存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java Virtual Machine-自动内存管理机制（内存区域）">
 <meta property="og:url" content="http://yoursite.com/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/index.html">
 <meta property="og:site_name" content="BittenTail">
-<meta property="og:description" content="一 概述与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为new的每一个对象都去写向对应的delect/free，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。 二 Java运行时数据区   由线程共享的数据区 线程隔离的数据区    方法区（Met">
+<meta property="og:description" content="概述与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为new的每一个对象都去写向对应的delect/free，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-13T06:01:25.533Z">
+<meta property="og:updated_time" content="2019-11-13T06:07:00.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Virtual Machine-自动内存管理机制（内存区域）">
-<meta name="twitter:description" content="一 概述与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为new的每一个对象都去写向对应的delect/free，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。 二 Java运行时数据区   由线程共享的数据区 线程隔离的数据区    方法区（Met">
+<meta name="twitter:description" content="概述与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为new的每一个对象都去写向对应的delect/free，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。">
   
     <link rel="alternative" href="/atom.xml" title="BittenTail" type="application/atom+xml">
   
@@ -302,8 +302,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h1><p>与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为<strong>new</strong>的每一个对象都去写向对应的<strong>delect/free</strong>，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。</p>
-<h1 id="二-Java运行时数据区"><a href="#二-Java运行时数据区" class="headerlink" title="二 Java运行时数据区"></a>二 Java运行时数据区</h1><table>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为<strong>new</strong>的每一个对象都去写向对应的<strong>delect/free</strong>，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。</p>
+<a id="more"></a>
+<h1 id="Java运行时数据区"><a href="#Java运行时数据区" class="headerlink" title="Java运行时数据区"></a>Java运行时数据区</h1><table>
 <thead>
 <tr>
 <th>由线程共享的数据区</th>
@@ -322,22 +323,15 @@
 <td></td>
 <td>程序技术器（Program Counter Register）</td>
 </tr>
-<tr>
-<td>## 1 程序计数器（Program Counter Register）</td>
-<td></td>
-</tr>
-<tr>
-<td><strong><em>线程私有的</em></strong></td>
-<td></td>
-</tr>
 </tbody></table>
+<h2 id="程序计数器（Program-Counter-Register）"><a href="#程序计数器（Program-Counter-Register）" class="headerlink" title="程序计数器（Program Counter Register）"></a>程序计数器（Program Counter Register）</h2><p><strong><em>线程私有的</em></strong>  </p>
 <ul>
 <li>定义：程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。</li>
 <li>作用：由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式实现的，因此在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）都只会执行一条线程中的指令。所以为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，且各线程之间计数器互不影响，独立存储，我们称这片内存区域为“线程私有”的内存。</li>
 <li>线程计数器：<br>线程正在执行一个Java方法—-》计数器记录的是正在执行的虚拟机字节码指令的地址。<br>线程正在执行一个Native方法–》计数器值为空（Undefined）  </li>
 </ul>
 <p><strong>注</strong>：此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</p>
-<h2 id="2-Java虚拟机栈（Java-Virtual-Machine-Stack）"><a href="#2-Java虚拟机栈（Java-Virtual-Machine-Stack）" class="headerlink" title="2 Java虚拟机栈（Java Virtual Machine Stack）"></a>2 Java虚拟机栈（Java Virtual Machine Stack）</h2><p><strong><em>线程私有的</em></strong> </p>
+<h2 id="Java虚拟机栈（Java-Virtual-Machine-Stack）"><a href="#Java虚拟机栈（Java-Virtual-Machine-Stack）" class="headerlink" title="Java虚拟机栈（Java Virtual Machine Stack）"></a>Java虚拟机栈（Java Virtual Machine Stack）</h2><p><strong><em>线程私有的</em></strong> </p>
 <ul>
 <li>生命周期与线程相同。</li>
 <li>虚拟机栈描述的是Java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链、方法出口等信息。<br>每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</li>
@@ -345,7 +339,7 @@
 <li>局部变量表所需的内存空间在编译期间完成分配，在方法运行期间不会改变局部变量表的大小。  </li>
 </ul>
 <p><strong>PS</strong>：<br>栈帧：是方法运行时的基础数据结构。</p>
-<h2 id="3-本地方法栈（Native-Method-Stack）"><a href="#3-本地方法栈（Native-Method-Stack）" class="headerlink" title="3 本地方法栈（Native Method Stack）"></a>3 本地方法栈（Native Method Stack）</h2><h2 id="4-Java堆（Java-Heap）"><a href="#4-Java堆（Java-Heap）" class="headerlink" title="4 Java堆（Java Heap）"></a>4 Java堆（Java Heap）</h2><h2 id="5-方法区（Method-Area"><a href="#5-方法区（Method-Area" class="headerlink" title="5 方法区（Method Area)"></a>5 方法区（Method Area)</h2><h2 id="6-运行时常量池（Runtime-Constant-Pool）"><a href="#6-运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="6 运行时常量池（Runtime Constant Pool）"></a>6 运行时常量池（Runtime Constant Pool）</h2><h2 id="7-直接内存（Direct-Memory）"><a href="#7-直接内存（Direct-Memory）" class="headerlink" title="7 直接内存（Direct Memory）"></a>7 直接内存（Direct Memory）</h2>
+<h2 id="本地方法栈（Native-Method-Stack）"><a href="#本地方法栈（Native-Method-Stack）" class="headerlink" title="本地方法栈（Native Method Stack）"></a>本地方法栈（Native Method Stack）</h2><h2 id="Java堆（Java-Heap）"><a href="#Java堆（Java-Heap）" class="headerlink" title="Java堆（Java Heap）"></a>Java堆（Java Heap）</h2><h2 id="方法区（Method-Area"><a href="#方法区（Method-Area" class="headerlink" title="方法区（Method Area)"></a>方法区（Method Area)</h2><h2 id="运行时常量池（Runtime-Constant-Pool）"><a href="#运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="运行时常量池（Runtime Constant Pool）"></a>运行时常量池（Runtime Constant Pool）</h2><h2 id="直接内存（Direct-Memory）"><a href="#直接内存（Direct-Memory）" class="headerlink" title="直接内存（Direct Memory）"></a>直接内存（Direct Memory）</h2>
       
     </div>
     
@@ -356,7 +350,7 @@
         <p><span>本文标题:</span><a  href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/">Java Virtual Machine-自动内存管理机制（内存区域）</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 BittenTail 的个人博客">BittenTail</a></p>
         <p><span>发布时间:</span>2019年11月11日 - 15时50分</p>
-        <p><span>最后更新:</span>2019年11月13日 - 14时01分</p>
+        <p><span>最后更新:</span>2019年11月13日 - 14时07分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/" title="Java Virtual Machine-自动内存管理机制（内存区域）">http://yoursite.com/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/　　作者: BittenTail" title=""></span>
@@ -384,7 +378,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-概述"><span class="toc-number">1.</span> <span class="toc-text">一 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-Java运行时数据区"><span class="toc-number">2.</span> <span class="toc-text">二 Java运行时数据区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Java虚拟机栈（Java-Virtual-Machine-Stack）"><span class="toc-number">2.1.</span> <span class="toc-text">2 Java虚拟机栈（Java Virtual Machine Stack）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-本地方法栈（Native-Method-Stack）"><span class="toc-number">2.2.</span> <span class="toc-text">3 本地方法栈（Native Method Stack）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Java堆（Java-Heap）"><span class="toc-number">2.3.</span> <span class="toc-text">4 Java堆（Java Heap）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-方法区（Method-Area"><span class="toc-number">2.4.</span> <span class="toc-text">5 方法区（Method Area)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-运行时常量池（Runtime-Constant-Pool）"><span class="toc-number">2.5.</span> <span class="toc-text">6 运行时常量池（Runtime Constant Pool）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-直接内存（Direct-Memory）"><span class="toc-number">2.6.</span> <span class="toc-text">7 直接内存（Direct Memory）</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Java运行时数据区"><span class="toc-number">2.</span> <span class="toc-text">Java运行时数据区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#程序计数器（Program-Counter-Register）"><span class="toc-number">2.1.</span> <span class="toc-text">程序计数器（Program Counter Register）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java虚拟机栈（Java-Virtual-Machine-Stack）"><span class="toc-number">2.2.</span> <span class="toc-text">Java虚拟机栈（Java Virtual Machine Stack）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地方法栈（Native-Method-Stack）"><span class="toc-number">2.3.</span> <span class="toc-text">本地方法栈（Native Method Stack）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java堆（Java-Heap）"><span class="toc-number">2.4.</span> <span class="toc-text">Java堆（Java Heap）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法区（Method-Area"><span class="toc-number">2.5.</span> <span class="toc-text">方法区（Method Area)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行时常量池（Runtime-Constant-Pool）"><span class="toc-number">2.6.</span> <span class="toc-text">运行时常量池（Runtime Constant Pool）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接内存（Direct-Memory）"><span class="toc-number">2.7.</span> <span class="toc-text">直接内存（Direct Memory）</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
