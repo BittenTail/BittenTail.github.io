@@ -7,20 +7,20 @@
   
   
   
-  <title>Linux-链接 | BittenTail</title>
+  <title>Java Virtual Machine-自动内存管理机制（内存区域） | BittenTail</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Linux链接">
-<meta name="keywords" content="学习笔记,Linux,链接">
+  <meta name="description" content="一 概述与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为new的每一个对象都去写向对应的delect/free，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。 二 Java运行时数据区   由线程共享的数据区 线程隔离的数据区    方法区（Met">
+<meta name="keywords" content="学习笔记,JVM,内存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux-链接">
-<meta property="og:url" content="http://yoursite.com/2019/10/24/Linux-链接/index.html">
+<meta property="og:title" content="Java Virtual Machine-自动内存管理机制（内存区域）">
+<meta property="og:url" content="http://yoursite.com/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/index.html">
 <meta property="og:site_name" content="BittenTail">
-<meta property="og:description" content="Linux链接">
+<meta property="og:description" content="一 概述与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为new的每一个对象都去写向对应的delect/free，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。 二 Java运行时数据区   由线程共享的数据区 线程隔离的数据区    方法区（Met">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-12T06:04:24.376Z">
+<meta property="og:updated_time" content="2019-11-13T06:01:25.533Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux-链接">
-<meta name="twitter:description" content="Linux链接">
+<meta name="twitter:title" content="Java Virtual Machine-自动内存管理机制（内存区域）">
+<meta name="twitter:description" content="一 概述与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为new的每一个对象都去写向对应的delect/free，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。 二 Java运行时数据区   由线程共享的数据区 线程隔离的数据区    方法区（Met">
   
     <link rel="alternative" href="/atom.xml" title="BittenTail" type="application/atom+xml">
   
@@ -258,11 +258,11 @@
         </header>
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Linux-链接" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java Virtual Machine-自动内存管理机制（内存区域）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a  href="/2019/10/24/Linux-链接/" class="article-date">
-      <time datetime="2019-10-24T03:05:59.000Z" itemprop="datePublished">2019-10-24</time>
+      <a  href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/" class="article-date">
+      <time datetime="2019-11-11T07:50:15.000Z" itemprop="datePublished">2019-11-11</time>
 </a>
 
     </div>
@@ -276,7 +276,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Linux-链接
+      Java Virtual Machine-自动内存管理机制（内存区域）
     </h1>
   
 
@@ -286,13 +286,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/链接/">链接</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存/">内存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -302,44 +302,50 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="Linux链接"><a href="#Linux链接" class="headerlink" title="Linux链接"></a>Linux链接</h1><a id="more"></a>
-<p>在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。</p>
-<hr>
-<h2 id="硬链接："><a href="#硬链接：" class="headerlink" title="硬链接："></a>硬链接：</h2><p>硬链接指通过索引节点来进行连接。在Linux的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号（Inode Index），它存储着文件重要参数信息，也就是元数据（metadata），比如创建时间、修改时间、文件大小、属主、归属的用户组（属组）、读写权数据所在block号等。<br>在Linux中，多个文件名指向同一索引节点是存在的。比如：A是B的硬链接（A和B均为文件名），则A的目录项中的inode节点号与B的目录项中的inode节点号相同，即一个inode节点对应两个不同的文件名，两个文件名指向同一个文件，A和B对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个。<br>硬链接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬链接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的链接。只删除一个链接并不影响索引节点本身和其他的链接，只有当最后一个链接被删除后，文件的数据块及目录的链接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬链接文件均被删除。</p>
-<hr>
-<h2 id="软链接："><a href="#软链接：" class="headerlink" title="软链接："></a>软链接：</h2><p>软链接（符号链接），类似于windows系统中的快捷方式。它实际上是一种特殊的文件。在符号链接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。比如：A是B的软链接（A和B都是文件名），A的目录项中的inode节点号与B的目录项中的inode节点号不相同，A和B指向的是两个不同的inode，继而指向两块不同的数据块。但是A的数据块中存放的只是B的路径名（可以根据这个找到B的目录项）。A和B之间是“主从”关系，如果B被删除了，A任然存在（因为两个是不同的文件），但指向的是一个无效的链接。</p>
-<hr>
-<h2 id="两者的特点"><a href="#两者的特点" class="headerlink" title="两者的特点"></a>两者的特点</h2><h3 id="软链接：-1"><a href="#软链接：-1" class="headerlink" title="软链接："></a>软链接：</h3><ul>
-<li>1.软链接是存放另一个文件的路径的形式存在。</li>
-<li>2.软链接可以跨文件系统，硬链接不行。</li>
-<li>3.软链接可以对一个不存在的文件名进行链接，硬链接必须要有源文件。</li>
-<li>4.软链接可以对目录进行链接。</li>
+        <h1 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h1><p>与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为<strong>new</strong>的每一个对象都去写向对应的<strong>delect/free</strong>，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。</p>
+<h1 id="二-Java运行时数据区"><a href="#二-Java运行时数据区" class="headerlink" title="二 Java运行时数据区"></a>二 Java运行时数据区</h1><table>
+<thead>
+<tr>
+<th>由线程共享的数据区</th>
+<th>线程隔离的数据区</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方法区（Method Area)</td>
+<td>虚拟机栈（VM Stack）</td>
+</tr>
+<tr>
+<td>堆（Heap）</td>
+<td>本地方法栈（Native Method Stack）</td>
+</tr>
+<tr>
+<td></td>
+<td>程序技术器（Program Counter Register）</td>
+</tr>
+<tr>
+<td>## 1 程序计数器（Program Counter Register）</td>
+<td></td>
+</tr>
+<tr>
+<td><strong><em>线程私有的</em></strong></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>定义：程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。</li>
+<li>作用：由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式实现的，因此在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）都只会执行一条线程中的指令。所以为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，且各线程之间计数器互不影响，独立存储，我们称这片内存区域为“线程私有”的内存。</li>
+<li>线程计数器：<br>线程正在执行一个Java方法—-》计数器记录的是正在执行的虚拟机字节码指令的地址。<br>线程正在执行一个Native方法–》计数器值为空（Undefined）  </li>
 </ul>
-<h3 id="硬链接：-1"><a href="#硬链接：-1" class="headerlink" title="硬链接："></a>硬链接：</h3><ul>
-<li>1.硬链接，以文件副本的形式存在。但不占用实际空间。</li>
-<li>2.不允许给目录创建硬链接。</li>
-<li>3.硬链接只有在同一个文件系统中才能创建。</li>
-<li>4.删除一个硬链接文件并不影响其他有相同inode号的文件。</li>
+<p><strong>注</strong>：此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</p>
+<h2 id="2-Java虚拟机栈（Java-Virtual-Machine-Stack）"><a href="#2-Java虚拟机栈（Java-Virtual-Machine-Stack）" class="headerlink" title="2 Java虚拟机栈（Java Virtual Machine Stack）"></a>2 Java虚拟机栈（Java Virtual Machine Stack）</h2><p><strong><em>线程私有的</em></strong> </p>
+<ul>
+<li>生命周期与线程相同。</li>
+<li>虚拟机栈描述的是Java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链、方法出口等信息。<br>每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</li>
+<li>局部变量表：存放了编译期可知的各种基本数据类型（boolean、byte、short、int、long、float、double、char）、对象引用（reference类型，它不等同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。<br>其中64位长度的long和double类型的数据会占用两个局部变量空间（Slot），其余的数据类型只占用一个。</li>
+<li>局部变量表所需的内存空间在编译期间完成分配，在方法运行期间不会改变局部变量表的大小。  </li>
 </ul>
-<p><strong>不论是硬链接或软链接都不会将原本的档案复制一份，只会占用非常少量的磁盘空间。</strong></p>
-<p>Linux系统可以用ln命令来创建链接文件。</p>
-<h5 id="ln命令格式："><a href="#ln命令格式：" class="headerlink" title="ln命令格式："></a>ln命令格式：</h5><p><strong>ln [参数] [源文件或目录] [目标文件或目录]</strong>   </p>
-<h6 id="主要参数："><a href="#主要参数：" class="headerlink" title="主要参数："></a>主要参数：</h6><ul>
-<li>-i交互模式，文件存在则提示用户是否覆盖。</li>
-<li>-s软链接（符号链接）</li>
-<li>-d允许超级用户制作目录的硬链接</li>
-<li>-b删除，覆盖以前建立的链接<ul>
-<li>软链接（符号链接）：ln -s source target</li>
-<li>硬链接（实体链接）：ln source target</li>
-</ul>
-</li>
-</ul>
-<hr>
-<blockquote>
-<p>songguojun:<a href="https://www.cnblogs.com/songgj/p/9115954.html" target="_blank" rel="noopener">https://www.cnblogs.com/songgj/p/9115954.html</a></p>
-</blockquote>
-<hr>
-<h3 id="PS："><a href="#PS：" class="headerlink" title="PS："></a>PS：</h3>
+<p><strong>PS</strong>：<br>栈帧：是方法运行时的基础数据结构。</p>
+<h2 id="3-本地方法栈（Native-Method-Stack）"><a href="#3-本地方法栈（Native-Method-Stack）" class="headerlink" title="3 本地方法栈（Native Method Stack）"></a>3 本地方法栈（Native Method Stack）</h2><h2 id="4-Java堆（Java-Heap）"><a href="#4-Java堆（Java-Heap）" class="headerlink" title="4 Java堆（Java Heap）"></a>4 Java堆（Java Heap）</h2><h2 id="5-方法区（Method-Area"><a href="#5-方法区（Method-Area" class="headerlink" title="5 方法区（Method Area)"></a>5 方法区（Method Area)</h2><h2 id="6-运行时常量池（Runtime-Constant-Pool）"><a href="#6-运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="6 运行时常量池（Runtime Constant Pool）"></a>6 运行时常量池（Runtime Constant Pool）</h2><h2 id="7-直接内存（Direct-Memory）"><a href="#7-直接内存（Direct-Memory）" class="headerlink" title="7 直接内存（Direct Memory）"></a>7 直接内存（Direct Memory）</h2>
       
     </div>
     
@@ -347,13 +353,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a  href="/2019/10/24/Linux-链接/">Linux-链接</a></p>
+        <p><span>本文标题:</span><a  href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/">Java Virtual Machine-自动内存管理机制（内存区域）</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 BittenTail 的个人博客">BittenTail</a></p>
-        <p><span>发布时间:</span>2019年10月24日 - 11时05分</p>
-        <p><span>最后更新:</span>2019年11月12日 - 14时04分</p>
+        <p><span>发布时间:</span>2019年11月11日 - 15时50分</p>
+        <p><span>最后更新:</span>2019年11月13日 - 14时01分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/10/24/Linux-链接/" title="Linux-链接">http://yoursite.com/2019/10/24/Linux-链接/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/10/24/Linux-链接/　　作者: BittenTail" title=""></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/" title="Java Virtual Machine-自动内存管理机制（内存区域）">http://yoursite.com/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/　　作者: BittenTail" title=""></span>
         </p>
         <p>
             <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -364,18 +370,9 @@
 
 <nav id="article-nav">
   
-    <a  href="/2019/11/07/数据库语句学习/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          数据库语句学习
-        
-      </div>
-    </a>
   
-  
-    <a  href="/2019/10/22/Redis初学/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Redis初学</div>
+    <a  href="/2019/11/11/数据库查询语句-select/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据库查询语句-select</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -387,7 +384,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux链接"><span class="toc-number">1.</span> <span class="toc-text">Linux链接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#硬链接："><span class="toc-number">1.1.</span> <span class="toc-text">硬链接：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软链接："><span class="toc-number">1.2.</span> <span class="toc-text">软链接：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#两者的特点"><span class="toc-number">1.3.</span> <span class="toc-text">两者的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#软链接：-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">软链接：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#硬链接：-1"><span class="toc-number">1.3.2.</span> <span class="toc-text">硬链接：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ln命令格式："><span class="toc-number">1.3.2.0.1.</span> <span class="toc-text">ln命令格式：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#主要参数："><span class="toc-number">1.3.2.0.1.1.</span> <span class="toc-text">主要参数：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PS："><span class="toc-number">1.3.3.</span> <span class="toc-text">PS：</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-概述"><span class="toc-number">1.</span> <span class="toc-text">一 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-Java运行时数据区"><span class="toc-number">2.</span> <span class="toc-text">二 Java运行时数据区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Java虚拟机栈（Java-Virtual-Machine-Stack）"><span class="toc-number">2.1.</span> <span class="toc-text">2 Java虚拟机栈（Java Virtual Machine Stack）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-本地方法栈（Native-Method-Stack）"><span class="toc-number">2.2.</span> <span class="toc-text">3 本地方法栈（Native Method Stack）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Java堆（Java-Heap）"><span class="toc-number">2.3.</span> <span class="toc-text">4 Java堆（Java Heap）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-方法区（Method-Area"><span class="toc-number">2.4.</span> <span class="toc-text">5 方法区（Method Area)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-运行时常量池（Runtime-Constant-Pool）"><span class="toc-number">2.5.</span> <span class="toc-text">6 运行时常量池（Runtime Constant Pool）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-直接内存（Direct-Memory）"><span class="toc-number">2.6.</span> <span class="toc-text">7 直接内存（Direct Memory）</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -460,13 +457,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a  href="/2019/11/07/数据库语句学习/" title="上一篇: 数据库语句学习">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a  href="/2019/10/22/Redis初学/" title="下一篇: Redis初学">
+            <a  href="/2019/11/11/数据库查询语句-select/" title="下一篇: 数据库查询语句-select">
                 <i class="fa fa-angle-right"></i>
             </a>
         

@@ -189,7 +189,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/My/" style="font-size: 10px;">My</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/排序/" style="font-size: 13.33px;">排序</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/查询/" style="font-size: 10px;">查询</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/脚本语法/" style="font-size: 10px;">脚本语法</a> <a href="/tags/语法/" style="font-size: 13.33px;">语法</a> <a href="/tags/链接/" style="font-size: 10px;">链接</a>
+                        <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/My/" style="font-size: 10px;">My</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/排序/" style="font-size: 13.33px;">排序</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/查询/" style="font-size: 10px;">查询</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/脚本语法/" style="font-size: 10px;">脚本语法</a> <a href="/tags/语法/" style="font-size: 13.33px;">语法</a> <a href="/tags/链接/" style="font-size: 10px;">链接</a>
                     </div>
                 </section>
                 
@@ -257,6 +257,114 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Java Virtual Machine-自动内存管理机制（内存区域）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/" class="article-date">
+      <time datetime="2019-11-11T07:50:15.000Z" itemprop="datePublished">2019-11-11</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/">Java Virtual Machine-自动内存管理机制（内存区域）</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h1><p>与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为<strong>new</strong>的每一个对象都去写向对应的<strong>delect/free</strong>，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。</p>
+<h1 id="二-Java运行时数据区"><a href="#二-Java运行时数据区" class="headerlink" title="二 Java运行时数据区"></a>二 Java运行时数据区</h1><table>
+<thead>
+<tr>
+<th>由线程共享的数据区</th>
+<th>线程隔离的数据区</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方法区（Method Area)</td>
+<td>虚拟机栈（VM Stack）</td>
+</tr>
+<tr>
+<td>堆（Heap）</td>
+<td>本地方法栈（Native Method Stack）</td>
+</tr>
+<tr>
+<td></td>
+<td>程序技术器（Program Counter Register）</td>
+</tr>
+<tr>
+<td>## 1 程序计数器（Program Counter Register）</td>
+<td></td>
+</tr>
+<tr>
+<td><strong><em>线程私有的</em></strong></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>定义：程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。</li>
+<li>作用：由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式实现的，因此在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）都只会执行一条线程中的指令。所以为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，且各线程之间计数器互不影响，独立存储，我们称这片内存区域为“线程私有”的内存。</li>
+<li>线程计数器：<br>线程正在执行一个Java方法—-》计数器记录的是正在执行的虚拟机字节码指令的地址。<br>线程正在执行一个Native方法–》计数器值为空（Undefined）  </li>
+</ul>
+<p><strong>注</strong>：此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</p>
+<h2 id="2-Java虚拟机栈（Java-Virtual-Machine-Stack）"><a href="#2-Java虚拟机栈（Java-Virtual-Machine-Stack）" class="headerlink" title="2 Java虚拟机栈（Java Virtual Machine Stack）"></a>2 Java虚拟机栈（Java Virtual Machine Stack）</h2><p><strong><em>线程私有的</em></strong> </p>
+<ul>
+<li>生命周期与线程相同。</li>
+<li>虚拟机栈描述的是Java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链、方法出口等信息。<br>每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</li>
+<li>局部变量表：存放了编译期可知的各种基本数据类型（boolean、byte、short、int、long、float、double、char）、对象引用（reference类型，它不等同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。<br>其中64位长度的long和double类型的数据会占用两个局部变量空间（Slot），其余的数据类型只占用一个。</li>
+<li>局部变量表所需的内存空间在编译期间完成分配，在方法运行期间不会改变局部变量表的大小。  </li>
+</ul>
+<p><strong>PS</strong>：<br>栈帧：是方法运行时的基础数据结构。</p>
+<h2 id="3-本地方法栈（Native-Method-Stack）"><a href="#3-本地方法栈（Native-Method-Stack）" class="headerlink" title="3 本地方法栈（Native Method Stack）"></a>3 本地方法栈（Native Method Stack）</h2><h2 id="4-Java堆（Java-Heap）"><a href="#4-Java堆（Java-Heap）" class="headerlink" title="4 Java堆（Java Heap）"></a>4 Java堆（Java Heap）</h2><h2 id="5-方法区（Method-Area"><a href="#5-方法区（Method-Area" class="headerlink" title="5 方法区（Method Area)"></a>5 方法区（Method Area)</h2><h2 id="6-运行时常量池（Runtime-Constant-Pool）"><a href="#6-运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="6 运行时常量池（Runtime Constant Pool）"></a>6 运行时常量池（Runtime Constant Pool）</h2><h2 id="7-直接内存（Direct-Memory）"><a href="#7-直接内存（Direct-Memory）" class="headerlink" title="7 直接内存（Direct Memory）"></a>7 直接内存（Direct Memory）</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存/">内存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-数据库查询语句-select" class="article article-type-post" itemscope itemprop="blogPost">
   
