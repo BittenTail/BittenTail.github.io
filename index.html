@@ -189,7 +189,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/My/" style="font-size: 10px;">My</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/object-Object/" style="font-size: 10px;">[object Object]</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/排序/" style="font-size: 13.33px;">排序</a> <a href="/tags/操作符/" style="font-size: 10px;">操作符</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/查询/" style="font-size: 10px;">查询</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/脚本语法/" style="font-size: 10px;">脚本语法</a> <a href="/tags/语法/" style="font-size: 13.33px;">语法</a> <a href="/tags/链接/" style="font-size: 10px;">链接</a>
+                        <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/My/" style="font-size: 10px;">My</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/object-Object/" style="font-size: 10px;">[object Object]</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/哈夫曼编码/" style="font-size: 10px;">哈夫曼编码</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/排序/" style="font-size: 13.33px;">排序</a> <a href="/tags/操作符/" style="font-size: 10px;">操作符</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/查询/" style="font-size: 10px;">查询</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/脚本语法/" style="font-size: 10px;">脚本语法</a> <a href="/tags/语法/" style="font-size: 13.33px;">语法</a> <a href="/tags/链接/" style="font-size: 10px;">链接</a>
                     </div>
                 </section>
                 
@@ -257,6 +257,126 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-哈夫曼编码" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2019/11/23/哈夫曼编码/" class="article-date">
+      <time datetime="2019-11-23T01:24:47.000Z" itemprop="datePublished">2019-11-23</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2019/11/23/哈夫曼编码/">哈夫曼编码</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h1><p>哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。</p>
+<h2 id="哈夫曼编码-1"><a href="#哈夫曼编码-1" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h2><ul>
+<li>假定我们希望压缩一个十万个字符的数据文件，下表给出了文件中所出现的字符和他们所出现的频率。</li>
+<li><table>
+<thead>
+<tr>
+<th></th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+<th>f</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>频率（千次）</td>
+<td>45</td>
+<td>13</td>
+<td>12</td>
+<td>16</td>
+<td>9</td>
+<td>5</td>
+</tr>
+<tr>
+<td>定长编码</td>
+<td>000</td>
+<td>001</td>
+<td>010</td>
+<td>011</td>
+<td>100</td>
+<td>101</td>
+</tr>
+<tr>
+<td>变长编码</td>
+<td>0</td>
+<td>101</td>
+<td>100</td>
+<td>111</td>
+<td>1101</td>
+<td>1100</td>
+</tr>
+</tbody></table>
+</li>
+<li>采用一种二进制字符编码，每个字符用一个唯一的二进制串表示，称为码字。<ul>
+<li>定长编码：需要用3位来表示6个字符，如上表定长编码所示，这种方式需要300000个二进制位来编码文件。</li>
+<li>变长编码（variable-length code）：可以达到比定长编码好得多的压缩率，其思想是赋予高频字符短码字，赋予低频字符长码字。如上表变长编码所示。，这种编码表示共需224000位，比定长编码节约了25%的空间。   </li>
+</ul>
+</li>
+</ul>
+<p><strong>前缀码(prefix code）：</strong>即没有任何码字是其他码字的前缀。<br>前缀码的作用是简化解码过程。由于没有码字是其他码字的前缀，编码文件的开始码字是无歧义的。我们可以简单的识别出开始码字，将其转换回原字符，然后对编码文件剩余部分重复这种解码过程。</p>
+<h2 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h2><p>前缀码的一种方便的表示形式，可以容易地截取开始码字。<br>一种二叉树，其叶节点为给定的字符。字符的二进制码字用从根节点到该字符叶节点的简单路径表示，其中0意味着“转向左孩子”，1意味着“转向右孩子”。<br>注意：编码树并不是二叉搜索树，因为叶节点并未有序排列，而内部节点并不包含字符关键字。</p>
+<p><code>mermaid
+graph TD
+    a--&gt;|text|b</code>​</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/数据结构/">数据结构</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/哈夫曼编码/">哈夫曼编码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-Java杂记" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -331,76 +451,6 @@
 
 
   
-    <article id="post-Java Virtual Machine-自动内存管理机制（内存区域）" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/" class="article-date">
-      <time datetime="2019-11-11T07:50:15.000Z" itemprop="datePublished">2019-11-11</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/">Java Virtual Machine-自动内存管理机制（内存区域）</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为<strong>new</strong>的每一个对象都去写向对应的<strong>delect/free</strong>，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存/">内存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a   href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/#more">查看更多 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-数据库查询语句-select" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -451,6 +501,76 @@
       
         <p class="article-more-link">
           <a   href="/2019/11/11/数据库查询语句-select/#more">查看更多 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Java Virtual Machine-自动内存管理机制（内存区域）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/" class="article-date">
+      <time datetime="2019-11-11T07:50:15.000Z" itemprop="datePublished">2019-11-11</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/">Java Virtual Machine-自动内存管理机制（内存区域）</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为<strong>new</strong>的每一个对象都去写向对应的<strong>delect/free</strong>，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存/">内存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a   href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/#more">查看更多 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -891,67 +1011,10 @@
 
 
   
-    <article id="post-我的第一篇博客" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a  href="/2019/09/06/我的第一篇博客/" class="article-date">
-      <time datetime="2019-09-06T01:05:53.000Z" itemprop="datePublished">2019-09-06</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2019/09/06/我的第一篇博客/">我的第一篇博客</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/My/">My</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 </div>
