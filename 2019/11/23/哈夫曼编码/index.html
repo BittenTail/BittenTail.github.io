@@ -9,18 +9,18 @@
   
   <title>哈夫曼编码 | BittenTail</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哈夫曼编码哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。 哈夫曼编码 假定我们希望压缩一个十万个字符的数据文件，下表给出了文件中所出现的字符和他们所出现的频率。     a b c d e f    频率（千次） 45 13 12 16 9 5   定长编码 000 001 010 011 100 101   变长编码 0 101 100 111 1">
+  <meta name="description" content="哈夫曼编码哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。">
 <meta name="keywords" content="学习笔记,数据结构,哈夫曼编码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="哈夫曼编码">
 <meta property="og:url" content="http://yoursite.com/2019/11/23/哈夫曼编码/index.html">
 <meta property="og:site_name" content="BittenTail">
-<meta property="og:description" content="哈夫曼编码哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。 哈夫曼编码 假定我们希望压缩一个十万个字符的数据文件，下表给出了文件中所出现的字符和他们所出现的频率。     a b c d e f    频率（千次） 45 13 12 16 9 5   定长编码 000 001 010 011 100 101   变长编码 0 101 100 111 1">
+<meta property="og:description" content="哈夫曼编码哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-23T02:05:56.247Z">
+<meta property="og:updated_time" content="2019-12-09T13:35:38.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="哈夫曼编码">
-<meta name="twitter:description" content="哈夫曼编码哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。 哈夫曼编码 假定我们希望压缩一个十万个字符的数据文件，下表给出了文件中所出现的字符和他们所出现的频率。     a b c d e f    频率（千次） 45 13 12 16 9 5   定长编码 000 001 010 011 100 101   变长编码 0 101 100 111 1">
+<meta name="twitter:description" content="哈夫曼编码哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。">
   
     <link rel="alternative" href="/atom.xml" title="BittenTail" type="application/atom+xml">
   
@@ -191,7 +191,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/My/" style="font-size: 10px;">My</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/object-Object/" style="font-size: 10px;">[object Object]</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/哈夫曼编码/" style="font-size: 10px;">哈夫曼编码</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/排序/" style="font-size: 13.33px;">排序</a> <a href="/tags/操作符/" style="font-size: 10px;">操作符</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/查询/" style="font-size: 10px;">查询</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/脚本语法/" style="font-size: 10px;">脚本语法</a> <a href="/tags/语法/" style="font-size: 13.33px;">语法</a> <a href="/tags/链接/" style="font-size: 10px;">链接</a>
+                        <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/My/" style="font-size: 10px;">My</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/二叉树/" style="font-size: 10px;">二叉树</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/哈夫曼编码/" style="font-size: 10px;">哈夫曼编码</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/排序/" style="font-size: 13.33px;">排序</a> <a href="/tags/操作符/" style="font-size: 10px;">操作符</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/查询/" style="font-size: 10px;">查询</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/脚本语法/" style="font-size: 10px;">脚本语法</a> <a href="/tags/语法/" style="font-size: 13.33px;">语法</a> <a href="/tags/链接/" style="font-size: 10px;">链接</a>
                     </div>
                 </section>
                 
@@ -303,6 +303,7 @@
       
           
         <h1 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h1><p>哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。</p>
+<a id="more"></a>
 <h2 id="哈夫曼编码-1"><a href="#哈夫曼编码-1" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h2><ul>
 <li>假定我们希望压缩一个十万个字符的数据文件，下表给出了文件中所出现的字符和他们所出现的频率。</li>
 <li><table>
@@ -353,10 +354,14 @@
 </li>
 </ul>
 <p><strong>前缀码(prefix code）：</strong>即没有任何码字是其他码字的前缀。<br>前缀码的作用是简化解码过程。由于没有码字是其他码字的前缀，编码文件的开始码字是无歧义的。我们可以简单的识别出开始码字，将其转换回原字符，然后对编码文件剩余部分重复这种解码过程。</p>
-<h2 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h2><p>前缀码的一种方便的表示形式，可以容易地截取开始码字。<br>一种二叉树，其叶节点为给定的字符。字符的二进制码字用从根节点到该字符叶节点的简单路径表示，其中0意味着“转向左孩子”，1意味着“转向右孩子”。<br>注意：编码树并不是二叉搜索树，因为叶节点并未有序排列，而内部节点并不包含字符关键字。</p>
-<p><code>mermaid
-graph TD
-    a--&gt;|text|b</code>​</p>
+<h2 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h2><p>前缀码的一种方便的表示形式，可以容易地截取开始码字。<br>一种二叉树，其叶节点为给定的字符。字符的二进制码字用从根节点到该字符叶节点的简单路径表示，其中0意味着“转向左孩子”，1意味着“转向右孩子”。<br>注意：编码树并不是二叉搜索树，因为叶节点并未有序排列，而内部节点并不包含字符关键字。<br><code>mermaid
+graph TB
+　　client--&gt;|2 findConfigServices|LoadBalancer;
+　　LoadBalancer--&gt;|3 findService|metaServer;
+　　metaServer--&gt;Eureka;
+　　client--&gt;|4 access via ip:port/client load balance/error retry|ConfigService;
+　　ConfigService--&gt;|1 register/cancel|Eureka;
+　　ConfigService--&gt;|read/write|ConfigDB;</code>​</p>
 
       
     </div>
@@ -368,7 +373,7 @@ graph TD
         <p><span>本文标题:</span><a  href="/2019/11/23/哈夫曼编码/">哈夫曼编码</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 BittenTail 的个人博客">BittenTail</a></p>
         <p><span>发布时间:</span>2019年11月23日 - 09时24分</p>
-        <p><span>最后更新:</span>2019年11月23日 - 10时05分</p>
+        <p><span>最后更新:</span>2019年12月09日 - 21时35分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/11/23/哈夫曼编码/" title="哈夫曼编码">http://yoursite.com/2019/11/23/哈夫曼编码/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/23/哈夫曼编码/　　作者: BittenTail" title=""></span>
@@ -381,6 +386,15 @@ graph TD
 
 
 <nav id="article-nav">
+  
+    <a  href="/2019/12/09/二叉树的创建与遍历/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          二叉树的创建与遍历
+        
+      </div>
+    </a>
   
   
     <a  href="/2019/11/17/Java杂记/" id="article-nav-older" class="article-nav-link-wrap">
@@ -469,7 +483,9 @@ graph TD
 
     <div class="scroll" id="post-nav-button">
         
-            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a  href="/2019/12/09/二叉树的创建与遍历/" title="上一篇: 二叉树的创建与遍历">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
@@ -478,7 +494,7 @@ graph TD
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/哈夫曼编码/">哈夫曼编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/17/Java杂记/">Java杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/11/数据库查询语句-select/">数据库查询语句-select</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/">Java Virtual Machine-自动内存管理机制（内存区域）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/08/数据库脚本操作/">数据库脚本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/07/数据库语句学习/">数据库语句学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/Linux-链接/">Linux-链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/Redis初学/">Redis初学</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/归并排序/">归并排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/插入排序/">插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/我的第一篇博客/">我的第一篇博客</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/12/09/二叉树的创建与遍历/">二叉树的创建与遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/哈夫曼编码/">哈夫曼编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/17/Java杂记/">Java杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/11/数据库查询语句-select/">数据库查询语句-select</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/">Java Virtual Machine-自动内存管理机制（内存区域）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/08/数据库脚本操作/">数据库脚本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/07/数据库语句学习/">数据库语句学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/Linux-链接/">Linux-链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/Redis初学/">Redis初学</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/归并排序/">归并排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/插入排序/">插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/我的第一篇博客/">我的第一篇博客</a></li></ul>
     
 <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 

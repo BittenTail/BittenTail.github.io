@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-23T02:05:56.247Z</updated>
+  <updated>2019-12-09T13:57:51.083Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,23 +17,45 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>二叉树的创建与遍历</title>
+    <link href="http://yoursite.com/2019/12/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E9%81%8D%E5%8E%86/"/>
+    <id>http://yoursite.com/2019/12/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E9%81%8D%E5%8E%86/</id>
+    <published>2019-12-09T13:31:03.000Z</published>
+    <updated>2019-12-09T13:57:51.083Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="二叉树的结构定义"><a href="#二叉树的结构定义" class="headerlink" title="二叉树的结构定义"></a>二叉树的结构定义</h2><ul><li>使用Java进行二叉树的建立与遍历<a id="more"></a>  class TreeNode{<pre><code>int val;TreeNode left;TreeNode right;TreeNode(int x){val = x;}</code></pre>  }</li></ul><h2 id="二叉树的建立"><a href="#二叉树的建立" class="headerlink" title="二叉树的建立"></a>二叉树的建立</h2><ul><li>利用栈进行先序创建二叉树  </li></ul><hr><pre><code>//利用栈先序创建二叉树TreeNode creatTree(List&lt;Integer&gt; nums) {    Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();    TreeNode root = null;    TreeNode parent = null;    boolean lIsNull = false;    TreeNode p = null;    for(Integer i:nums) {        //判断是否已经创建完根节点        if(root == null) {            p = new TreeNode(i);            root = p;            parent = p;            stack.push(p);        }else if(i != null) { //输入的节点为null            p = new TreeNode(i);            if(lIsNull) { //创建完左孩子，且为null                parent.right = p;                parent = p;                lIsNull = false;            }else {//未创建左孩子                parent.left = p;                parent = p;            }            stack.push(p);        }else {            if(lIsNull) {//左孩子为空，且右孩子也为空                if(stack.isEmpty()) {//如果栈为空，便是最后一个节点                    return root;                }else {// 返回为为空节点的双亲的双亲                    parent = stack.pop();                }            }else {//节点为空，令左孩子为null，返回为其双亲，                //且使标记lIsNull为true，表示左孩子为空                parent = stack.pop();                lIsNull = true;            }        }    }    return root;}</code></pre><h2 id="先序遍历二叉树"><a href="#先序遍历二叉树" class="headerlink" title="先序遍历二叉树"></a>先序遍历二叉树</h2><ul><li>使用递归</li></ul><hr><pre><code>/* * 二叉树的先序遍历 *///使用递归先序遍历二叉树public void preOrderTraverse1(TreeNode root) {    if(root != null) {        System.out.print(root.val);        preOrderTraverse1(root.left);        preOrderTraverse1(root.right);    }}</code></pre><ul><li>使用栈</li></ul><hr><pre><code>//使用栈先序遍历二叉树public void preOrderTraverse2(TreeNode root) {    Stack&lt;TreeNode&gt; stack = new Stack&lt;TreeNode&gt;();    TreeNode p = root;    while(p != null || !stack.isEmpty()) {        if(p != null) {            System.out.print(p.val);            stack.push(p);            p = p.left;        }else {            p = stack.pop();            p = p.right;        }    }}</code></pre><h2 id="中序遍历二叉树"><a href="#中序遍历二叉树" class="headerlink" title="中序遍历二叉树"></a>中序遍历二叉树</h2><ul><li>使用递归</li></ul><hr><pre><code>/* * 二叉树的中序遍历 *///使用递归进行中序遍历二叉树public void inOrderTraverse1(TreeNode root) {    if(root != null) {        inOrderTraverse1(root.left);        System.out.print(root.val);        inOrderTraverse1(root.right);    }}</code></pre><ul><li>使用栈</li></ul><hr><pre><code>//使用栈进行中序遍历二叉树public void inOrderTraverse2(TreeNode root) {    Stack&lt;TreeNode&gt; stack = new Stack&lt;TreeNode&gt;();    while(root != null || !stack.isEmpty()) {        if(root != null) {            stack.push(root);            root = root.left;        }else {            root = stack.pop();            System.out.print(root.val);            root = root.right;        }    }}</code></pre><h2 id="中序遍历二叉树-1"><a href="#中序遍历二叉树-1" class="headerlink" title="中序遍历二叉树"></a>中序遍历二叉树</h2><ul><li>使用递归</li></ul><hr><pre><code>/* * 二叉树的后序遍历 *///使用递归进行后序遍历二叉树public void postOrderTraverse1(TreeNode root) {    if(root != null) {        postOrderTraverse1(root.left);        postOrderTraverse1(root.right);        System.out.print(root.val);    }}</code></pre><ul><li>使用栈</li></ul><hr><pre><code>//使用栈进行后序遍历二叉树public void postOrderTraverse2(TreeNode root) {    Stack&lt;TreeNode&gt; stack = new Stack&lt;TreeNode&gt;();    while(root != null || !stack.isEmpty()) {        if(root != null) {            //使每个节点入栈两个，从而达到后序输出根节点            stack.push(root);            stack.push(root);            root = root.left;        }else {            root = stack.pop();            //根据栈顶元素判断是遍历弹栈还是输出根节点弹栈            if(!stack.isEmpty() &amp;&amp; root.val == stack.peek().val){                root = root.right;            }else {                System.out.print(root.val);                root = null;            }        }    }}</code></pre><h2 id="层次（广度）遍历"><a href="#层次（广度）遍历" class="headerlink" title="层次（广度）遍历"></a>层次（广度）遍历</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;二叉树的结构定义&quot;&gt;&lt;a href=&quot;#二叉树的结构定义&quot; class=&quot;headerlink&quot; title=&quot;二叉树的结构定义&quot;&gt;&lt;/a&gt;二叉树的结构定义&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;使用Java进行二叉树的建立与遍历
+    
+    </summary>
+    
+    
+      <category term="数据结构" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="二叉树" scheme="http://yoursite.com/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>哈夫曼编码</title>
     <link href="http://yoursite.com/2019/11/23/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/"/>
     <id>http://yoursite.com/2019/11/23/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/</id>
     <published>2019-11-23T01:24:47.000Z</published>
-    <updated>2019-11-23T02:05:56.247Z</updated>
+    <updated>2019-12-09T13:35:38.487Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h1><p>哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。</p><h2 id="哈夫曼编码-1"><a href="#哈夫曼编码-1" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h2><ul><li>假定我们希望压缩一个十万个字符的数据文件，下表给出了文件中所出现的字符和他们所出现的频率。</li><li><table><thead><tr><th></th><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th><th>f</th></tr></thead><tbody><tr><td>频率（千次）</td><td>45</td><td>13</td><td>12</td><td>16</td><td>9</td><td>5</td></tr><tr><td>定长编码</td><td>000</td><td>001</td><td>010</td><td>011</td><td>100</td><td>101</td></tr><tr><td>变长编码</td><td>0</td><td>101</td><td>100</td><td>111</td><td>1101</td><td>1100</td></tr></tbody></table></li><li>采用一种二进制字符编码，每个字符用一个唯一的二进制串表示，称为码字。<ul><li>定长编码：需要用3位来表示6个字符，如上表定长编码所示，这种方式需要300000个二进制位来编码文件。</li><li>变长编码（variable-length code）：可以达到比定长编码好得多的压缩率，其思想是赋予高频字符短码字，赋予低频字符长码字。如上表变长编码所示。，这种编码表示共需224000位，比定长编码节约了25%的空间。   </li></ul></li></ul><p><strong>前缀码(prefix code）：</strong>即没有任何码字是其他码字的前缀。<br>前缀码的作用是简化解码过程。由于没有码字是其他码字的前缀，编码文件的开始码字是无歧义的。我们可以简单的识别出开始码字，将其转换回原字符，然后对编码文件剩余部分重复这种解码过程。</p><h2 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h2><p>前缀码的一种方便的表示形式，可以容易地截取开始码字。<br>一种二叉树，其叶节点为给定的字符。字符的二进制码字用从根节点到该字符叶节点的简单路径表示，其中0意味着“转向左孩子”，1意味着“转向右孩子”。<br>注意：编码树并不是二叉搜索树，因为叶节点并未有序排列，而内部节点并不包含字符关键字。</p><p><code>mermaidgraph TD    a--&gt;|text|b</code>​</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h1><p>哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。</p><a id="more"></a><h2 id="哈夫曼编码-1"><a href="#哈夫曼编码-1" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h2><ul><li>假定我们希望压缩一个十万个字符的数据文件，下表给出了文件中所出现的字符和他们所出现的频率。</li><li><table><thead><tr><th></th><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th><th>f</th></tr></thead><tbody><tr><td>频率（千次）</td><td>45</td><td>13</td><td>12</td><td>16</td><td>9</td><td>5</td></tr><tr><td>定长编码</td><td>000</td><td>001</td><td>010</td><td>011</td><td>100</td><td>101</td></tr><tr><td>变长编码</td><td>0</td><td>101</td><td>100</td><td>111</td><td>1101</td><td>1100</td></tr></tbody></table></li><li>采用一种二进制字符编码，每个字符用一个唯一的二进制串表示，称为码字。<ul><li>定长编码：需要用3位来表示6个字符，如上表定长编码所示，这种方式需要300000个二进制位来编码文件。</li><li>变长编码（variable-length code）：可以达到比定长编码好得多的压缩率，其思想是赋予高频字符短码字，赋予低频字符长码字。如上表变长编码所示。，这种编码表示共需224000位，比定长编码节约了25%的空间。   </li></ul></li></ul><p><strong>前缀码(prefix code）：</strong>即没有任何码字是其他码字的前缀。<br>前缀码的作用是简化解码过程。由于没有码字是其他码字的前缀，编码文件的开始码字是无歧义的。我们可以简单的识别出开始码字，将其转换回原字符，然后对编码文件剩余部分重复这种解码过程。</p><h2 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h2><p>前缀码的一种方便的表示形式，可以容易地截取开始码字。<br>一种二叉树，其叶节点为给定的字符。字符的二进制码字用从根节点到该字符叶节点的简单路径表示，其中0意味着“转向左孩子”，1意味着“转向右孩子”。<br>注意：编码树并不是二叉搜索树，因为叶节点并未有序排列，而内部节点并不包含字符关键字。<br><code>mermaidgraph TB　　client--&gt;|2 findConfigServices|LoadBalancer;　　LoadBalancer--&gt;|3 findService|metaServer;　　metaServer--&gt;Eureka;　　client--&gt;|4 access via ip:port/client load balance/error retry|ConfigService;　　ConfigService--&gt;|1 register/cancel|Eureka;　　ConfigService--&gt;|read/write|ConfigDB;</code>​</p>]]></content>
     
     <summary type="html">
     
-      
-      
-        
-        
-          
-        
-      
+      &lt;h1 id=&quot;哈夫曼编码&quot;&gt;&lt;a href=&quot;#哈夫曼编码&quot; class=&quot;headerlink&quot; title=&quot;哈夫曼编码&quot;&gt;&lt;/a&gt;哈夫曼编码&lt;/h1&gt;&lt;p&gt;哈夫曼编码可以很有效地压缩数据：通常可以节省20%~90%的空间，具体压缩率依赖于数据的特性。&lt;/p&gt;
     
     </summary>
     
@@ -54,22 +76,19 @@
     <link href="http://yoursite.com/2019/11/17/Java%E6%9D%82%E8%AE%B0/"/>
     <id>http://yoursite.com/2019/11/17/Java%E6%9D%82%E8%AE%B0/</id>
     <published>2019-11-17T11:23:19.000Z</published>
-    <updated>2019-11-17T11:25:00.451Z</updated>
+    <updated>2019-12-09T13:36:17.355Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h1><h2 id="指数记数法"><a href="#指数记数法" class="headerlink" title="指数记数法"></a>指数记数法</h2><ul><li>1.39E-43：其中e并不代表自然对数的基数（约等于2.718），而是“10的幂次”。</li></ul><h2 id="移位操作符"><a href="#移位操作符" class="headerlink" title="移位操作符"></a>移位操作符</h2><ul><li>移位操作符的运算对象是二进制的“位”。  </li><li>移位操作符只可用来处理整数类型（基本类型的一种）。</li><li>左移位操作符（&lt;&lt;）：能按照操作符右侧指定的位数将操作符左边的操作数向左移动（在低位补0）  </li><li>有符号”右移位操作符（&gt;&gt;）：按照操作符右侧指定的位数将操作符左边的操作数向右移动。<br>“有符号”右移位操作符使用“符号扩展”：若符号为正，则在高位插入0；若符号为负，则在高位插入1。</li><li>Java中增加了一种“无符号”右移位操作符（&gt;&gt;&gt;），它使用“零扩展”：无论正负，都在高位插入0。这一操作符在C或C++中是没有的。</li><li>如果对char、byte或者short类型的数值进行移位处理，那么在移位进行之前，他们会被转换为int类型，并且得到的结果也是一个int类型的值。<br>只有数值右端的低5位才有用，这样可防止我们移位超过int型值所具有d额位数。（译注：因为2的5次方为32，而int型值只有32位）<br>若对一个long类型的数值进行处理，最后得到的结果也是long。此时只会用到数值右端的低6位，以防止移位超过long型数值具有的位数。</li><li>“移位”可与“等号”（&lt;&lt;=或&gt;&gt;=或&gt;&gt;&gt;=）组合使用。注意：如果对byte或short值进行这样的移位运算，得到的可能不是正确的结果，他们会先被转换成int类型，再进行右移操作，然后被截断，赋值给原来的类型，在这种情况下可能得到-1的结果。</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h1><h2 id="指数记数法"><a href="#指数记数法" class="headerlink" title="指数记数法"></a>指数记数法</h2><ul><li>1.39E-43：其中e并不代表自然对数的基数（约等于2.718），而是“10的幂次”。<a id="more"></a><h2 id="移位操作符"><a href="#移位操作符" class="headerlink" title="移位操作符"></a>移位操作符</h2></li><li>移位操作符的运算对象是二进制的“位”。  </li><li>移位操作符只可用来处理整数类型（基本类型的一种）。</li><li>左移位操作符（&lt;&lt;）：能按照操作符右侧指定的位数将操作符左边的操作数向左移动（在低位补0）  </li><li>有符号”右移位操作符（&gt;&gt;）：按照操作符右侧指定的位数将操作符左边的操作数向右移动。<br>“有符号”右移位操作符使用“符号扩展”：若符号为正，则在高位插入0；若符号为负，则在高位插入1。</li><li>Java中增加了一种“无符号”右移位操作符（&gt;&gt;&gt;），它使用“零扩展”：无论正负，都在高位插入0。这一操作符在C或C++中是没有的。</li><li>如果对char、byte或者short类型的数值进行移位处理，那么在移位进行之前，他们会被转换为int类型，并且得到的结果也是一个int类型的值。<br>只有数值右端的低5位才有用，这样可防止我们移位超过int型值所具有d额位数。（译注：因为2的5次方为32，而int型值只有32位）<br>若对一个long类型的数值进行处理，最后得到的结果也是long。此时只会用到数值右端的低6位，以防止移位超过long型数值具有的位数。</li><li>“移位”可与“等号”（&lt;&lt;=或&gt;&gt;=或&gt;&gt;&gt;=）组合使用。注意：如果对byte或short值进行这样的移位运算，得到的可能不是正确的结果，他们会先被转换成int类型，再进行右移操作，然后被截断，赋值给原来的类型，在这种情况下可能得到-1的结果。</li></ul>]]></content>
     
     <summary type="html">
     
-      
-      
-        
-        
-          
-        
-      
+      &lt;h1 id=&quot;操作符&quot;&gt;&lt;a href=&quot;#操作符&quot; class=&quot;headerlink&quot; title=&quot;操作符&quot;&gt;&lt;/a&gt;操作符&lt;/h1&gt;&lt;h2 id=&quot;指数记数法&quot;&gt;&lt;a href=&quot;#指数记数法&quot; class=&quot;headerlink&quot; title=&quot;指数记数法&quot;&gt;&lt;/a&gt;指数记数法&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;1.39E-43：其中e并不代表自然对数的基数（约等于2.718），而是“10的幂次”。
     
     </summary>
     
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
       <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
@@ -77,8 +96,6 @@
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
       <category term="操作符" scheme="http://yoursite.com/tags/%E6%93%8D%E4%BD%9C%E7%AC%A6/"/>
-    
-      <category term="[object Object]" scheme="http://yoursite.com/tags/object-Object/"/>
     
   </entry>
   
@@ -197,13 +214,13 @@
     <link href="http://yoursite.com/2019/10/24/Linux-%E9%93%BE%E6%8E%A5/"/>
     <id>http://yoursite.com/2019/10/24/Linux-%E9%93%BE%E6%8E%A5/</id>
     <published>2019-10-24T03:05:59.000Z</published>
-    <updated>2019-11-12T06:04:24.376Z</updated>
+    <updated>2019-12-09T13:35:20.103Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Linux链接"><a href="#Linux链接" class="headerlink" title="Linux链接"></a>Linux链接</h1><a id="more"></a><p>在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。</p><hr><h2 id="硬链接："><a href="#硬链接：" class="headerlink" title="硬链接："></a>硬链接：</h2><p>硬链接指通过索引节点来进行连接。在Linux的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号（Inode Index），它存储着文件重要参数信息，也就是元数据（metadata），比如创建时间、修改时间、文件大小、属主、归属的用户组（属组）、读写权数据所在block号等。<br>在Linux中，多个文件名指向同一索引节点是存在的。比如：A是B的硬链接（A和B均为文件名），则A的目录项中的inode节点号与B的目录项中的inode节点号相同，即一个inode节点对应两个不同的文件名，两个文件名指向同一个文件，A和B对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个。<br>硬链接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬链接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的链接。只删除一个链接并不影响索引节点本身和其他的链接，只有当最后一个链接被删除后，文件的数据块及目录的链接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬链接文件均被删除。</p><hr><h2 id="软链接："><a href="#软链接：" class="headerlink" title="软链接："></a>软链接：</h2><p>软链接（符号链接），类似于windows系统中的快捷方式。它实际上是一种特殊的文件。在符号链接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。比如：A是B的软链接（A和B都是文件名），A的目录项中的inode节点号与B的目录项中的inode节点号不相同，A和B指向的是两个不同的inode，继而指向两块不同的数据块。但是A的数据块中存放的只是B的路径名（可以根据这个找到B的目录项）。A和B之间是“主从”关系，如果B被删除了，A任然存在（因为两个是不同的文件），但指向的是一个无效的链接。</p><hr><h2 id="两者的特点"><a href="#两者的特点" class="headerlink" title="两者的特点"></a>两者的特点</h2><h3 id="软链接：-1"><a href="#软链接：-1" class="headerlink" title="软链接："></a>软链接：</h3><ul><li>1.软链接是存放另一个文件的路径的形式存在。</li><li>2.软链接可以跨文件系统，硬链接不行。</li><li>3.软链接可以对一个不存在的文件名进行链接，硬链接必须要有源文件。</li><li>4.软链接可以对目录进行链接。</li></ul><h3 id="硬链接：-1"><a href="#硬链接：-1" class="headerlink" title="硬链接："></a>硬链接：</h3><ul><li>1.硬链接，以文件副本的形式存在。但不占用实际空间。</li><li>2.不允许给目录创建硬链接。</li><li>3.硬链接只有在同一个文件系统中才能创建。</li><li>4.删除一个硬链接文件并不影响其他有相同inode号的文件。</li></ul><p><strong>不论是硬链接或软链接都不会将原本的档案复制一份，只会占用非常少量的磁盘空间。</strong></p><p>Linux系统可以用ln命令来创建链接文件。</p><h5 id="ln命令格式："><a href="#ln命令格式：" class="headerlink" title="ln命令格式："></a>ln命令格式：</h5><p><strong>ln [参数] [源文件或目录] [目标文件或目录]</strong>   </p><h6 id="主要参数："><a href="#主要参数：" class="headerlink" title="主要参数："></a>主要参数：</h6><ul><li>-i交互模式，文件存在则提示用户是否覆盖。</li><li>-s软链接（符号链接）</li><li>-d允许超级用户制作目录的硬链接</li><li>-b删除，覆盖以前建立的链接<ul><li>软链接（符号链接）：ln -s source target</li><li>硬链接（实体链接）：ln source target</li></ul></li></ul><hr><blockquote><p>songguojun:<a href="https://www.cnblogs.com/songgj/p/9115954.html" target="_blank" rel="noopener">https://www.cnblogs.com/songgj/p/9115954.html</a></p></blockquote><hr><h3 id="PS："><a href="#PS：" class="headerlink" title="PS："></a>PS：</h3>]]></content>
+    <content type="html"><![CDATA[<h1 id="Linux链接"><a href="#Linux链接" class="headerlink" title="Linux链接"></a>Linux链接</h1><p>在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。</p><a id="more"></a><hr><h2 id="硬链接："><a href="#硬链接：" class="headerlink" title="硬链接："></a>硬链接：</h2><p>硬链接指通过索引节点来进行连接。在Linux的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号（Inode Index），它存储着文件重要参数信息，也就是元数据（metadata），比如创建时间、修改时间、文件大小、属主、归属的用户组（属组）、读写权数据所在block号等。<br>在Linux中，多个文件名指向同一索引节点是存在的。比如：A是B的硬链接（A和B均为文件名），则A的目录项中的inode节点号与B的目录项中的inode节点号相同，即一个inode节点对应两个不同的文件名，两个文件名指向同一个文件，A和B对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个。<br>硬链接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬链接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的链接。只删除一个链接并不影响索引节点本身和其他的链接，只有当最后一个链接被删除后，文件的数据块及目录的链接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬链接文件均被删除。</p><hr><h2 id="软链接："><a href="#软链接：" class="headerlink" title="软链接："></a>软链接：</h2><p>软链接（符号链接），类似于windows系统中的快捷方式。它实际上是一种特殊的文件。在符号链接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。比如：A是B的软链接（A和B都是文件名），A的目录项中的inode节点号与B的目录项中的inode节点号不相同，A和B指向的是两个不同的inode，继而指向两块不同的数据块。但是A的数据块中存放的只是B的路径名（可以根据这个找到B的目录项）。A和B之间是“主从”关系，如果B被删除了，A任然存在（因为两个是不同的文件），但指向的是一个无效的链接。</p><hr><h2 id="两者的特点"><a href="#两者的特点" class="headerlink" title="两者的特点"></a>两者的特点</h2><h3 id="软链接：-1"><a href="#软链接：-1" class="headerlink" title="软链接："></a>软链接：</h3><ul><li>1.软链接是存放另一个文件的路径的形式存在。</li><li>2.软链接可以跨文件系统，硬链接不行。</li><li>3.软链接可以对一个不存在的文件名进行链接，硬链接必须要有源文件。</li><li>4.软链接可以对目录进行链接。</li></ul><h3 id="硬链接：-1"><a href="#硬链接：-1" class="headerlink" title="硬链接："></a>硬链接：</h3><ul><li>1.硬链接，以文件副本的形式存在。但不占用实际空间。</li><li>2.不允许给目录创建硬链接。</li><li>3.硬链接只有在同一个文件系统中才能创建。</li><li>4.删除一个硬链接文件并不影响其他有相同inode号的文件。</li></ul><p><strong>不论是硬链接或软链接都不会将原本的档案复制一份，只会占用非常少量的磁盘空间。</strong></p><p>Linux系统可以用ln命令来创建链接文件。</p><h5 id="ln命令格式："><a href="#ln命令格式：" class="headerlink" title="ln命令格式："></a>ln命令格式：</h5><p><strong>ln [参数] [源文件或目录] [目标文件或目录]</strong>   </p><h6 id="主要参数："><a href="#主要参数：" class="headerlink" title="主要参数："></a>主要参数：</h6><ul><li>-i交互模式，文件存在则提示用户是否覆盖。</li><li>-s软链接（符号链接）</li><li>-d允许超级用户制作目录的硬链接</li><li>-b删除，覆盖以前建立的链接<ul><li>软链接（符号链接）：ln -s source target</li><li>硬链接（实体链接）：ln source target</li></ul></li></ul><hr><blockquote><p>songguojun:<a href="https://www.cnblogs.com/songgj/p/9115954.html" target="_blank" rel="noopener">https://www.cnblogs.com/songgj/p/9115954.html</a></p></blockquote><hr><h3 id="PS："><a href="#PS：" class="headerlink" title="PS："></a>PS：</h3>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Linux链接&quot;&gt;&lt;a href=&quot;#Linux链接&quot; class=&quot;headerlink&quot; title=&quot;Linux链接&quot;&gt;&lt;/a&gt;Linux链接&lt;/h1&gt;
+      &lt;h1 id=&quot;Linux链接&quot;&gt;&lt;a href=&quot;#Linux链接&quot; class=&quot;headerlink&quot; title=&quot;Linux链接&quot;&gt;&lt;/a&gt;Linux链接&lt;/h1&gt;&lt;p&gt;在Linux中链接分为两种，一种为硬链接（Hard Link），另外一种为软链接（Symbolic Link）或称为符号链接。默认情况下，ln命令产生硬链接。&lt;/p&gt;
     
     </summary>
     
