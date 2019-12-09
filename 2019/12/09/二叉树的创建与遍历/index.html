@@ -9,18 +9,18 @@
   
   <title>二叉树的创建与遍历 | BittenTail</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="二叉树的结构定义 使用Java进行二叉树的建立与遍历">
+  <meta name="description" content="二叉树的结构定义 使用Java进行二叉树的建立与遍历   class TreeNode{     int val;     TreeNode left;     TreeNode right;     TreeNode(int x){val = x;} }">
 <meta name="keywords" content="学习笔记,数据结构,二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉树的创建与遍历">
 <meta property="og:url" content="http://yoursite.com/2019/12/09/二叉树的创建与遍历/index.html">
 <meta property="og:site_name" content="BittenTail">
-<meta property="og:description" content="二叉树的结构定义 使用Java进行二叉树的建立与遍历">
+<meta property="og:description" content="二叉树的结构定义 使用Java进行二叉树的建立与遍历   class TreeNode{     int val;     TreeNode left;     TreeNode right;     TreeNode(int x){val = x;} }">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-09T13:57:51.083Z">
+<meta property="og:updated_time" content="2019-12-09T14:02:31.170Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉树的创建与遍历">
-<meta name="twitter:description" content="二叉树的结构定义 使用Java进行二叉树的建立与遍历">
+<meta name="twitter:description" content="二叉树的结构定义 使用Java进行二叉树的建立与遍历   class TreeNode{     int val;     TreeNode left;     TreeNode right;     TreeNode(int x){val = x;} }">
   
     <link rel="alternative" href="/atom.xml" title="BittenTail" type="application/atom+xml">
   
@@ -303,12 +303,15 @@
       
           
         <h2 id="二叉树的结构定义"><a href="#二叉树的结构定义" class="headerlink" title="二叉树的结构定义"></a>二叉树的结构定义</h2><ul>
-<li>使用Java进行二叉树的建立与遍历<a id="more"></a>
-  class TreeNode{<pre><code>int val;
-TreeNode left;
-TreeNode right;
-TreeNode(int x){val = x;}</code></pre>  }</li>
+<li>使用Java进行二叉树的建立与遍历</li>
 </ul>
+<hr>
+<pre><code>class TreeNode{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x){val = x;}
+}</code></pre><a id="more"></a>
 <h2 id="二叉树的建立"><a href="#二叉树的建立" class="headerlink" title="二叉树的建立"></a>二叉树的建立</h2><ul>
 <li>利用栈进行先序创建二叉树  </li>
 </ul>
@@ -454,7 +457,29 @@ public void postOrderTraverse2(TreeNode root) {
             }
         }
     }
-}</code></pre><h2 id="层次（广度）遍历"><a href="#层次（广度）遍历" class="headerlink" title="层次（广度）遍历"></a>层次（广度）遍历</h2>
+}</code></pre><h2 id="层次（广度）遍历"><a href="#层次（广度）遍历" class="headerlink" title="层次（广度）遍历"></a>层次（广度）遍历</h2><h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><pre><code>public class Solution {
+
+public static void main(String[] args) {
+
+    List&lt;Integer&gt; nums = Arrays.asList(1,2,null,3,null,null,4,null,5,null,null);
+    TreeNode root = new TreeNode(-1);
+    root = root.creatTree(nums);
+    //先序遍历
+    root.preOrderTraverse1(root);
+    System.out.println();
+    root.preOrderTraverse2(root);
+    System.out.println();
+    //中序遍历
+    root.inOrderTraverse1(root);
+    System.out.println();
+    root.inOrderTraverse2(root);
+    System.out.println();
+    //后序遍历
+    root.postOrderTraverse1(root);
+    System.out.println();
+    root.postOrderTraverse2(root);
+}</code></pre><p>}</p>
+
       
     </div>
     
@@ -465,7 +490,7 @@ public void postOrderTraverse2(TreeNode root) {
         <p><span>本文标题:</span><a  href="/2019/12/09/二叉树的创建与遍历/">二叉树的创建与遍历</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 BittenTail 的个人博客">BittenTail</a></p>
         <p><span>发布时间:</span>2019年12月09日 - 21时31分</p>
-        <p><span>最后更新:</span>2019年12月09日 - 21时57分</p>
+        <p><span>最后更新:</span>2019年12月09日 - 22时02分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/12/09/二叉树的创建与遍历/" title="二叉树的创建与遍历">http://yoursite.com/2019/12/09/二叉树的创建与遍历/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/12/09/二叉树的创建与遍历/　　作者: BittenTail" title=""></span>
@@ -493,7 +518,7 @@ public void postOrderTraverse2(TreeNode root) {
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的结构定义"><span class="toc-number">1.</span> <span class="toc-text">二叉树的结构定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的建立"><span class="toc-number">2.</span> <span class="toc-text">二叉树的建立</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#先序遍历二叉树"><span class="toc-number">3.</span> <span class="toc-text">先序遍历二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中序遍历二叉树"><span class="toc-number">4.</span> <span class="toc-text">中序遍历二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中序遍历二叉树-1"><span class="toc-number">5.</span> <span class="toc-text">中序遍历二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#层次（广度）遍历"><span class="toc-number">6.</span> <span class="toc-text">层次（广度）遍历</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的结构定义"><span class="toc-number">1.</span> <span class="toc-text">二叉树的结构定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的建立"><span class="toc-number">2.</span> <span class="toc-text">二叉树的建立</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#先序遍历二叉树"><span class="toc-number">3.</span> <span class="toc-text">先序遍历二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中序遍历二叉树"><span class="toc-number">4.</span> <span class="toc-text">中序遍历二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中序遍历二叉树-1"><span class="toc-number">5.</span> <span class="toc-text">中序遍历二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#层次（广度）遍历"><span class="toc-number">6.</span> <span class="toc-text">层次（广度）遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main"><span class="toc-number">7.</span> <span class="toc-text">main</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -575,7 +600,7 @@ public void postOrderTraverse2(TreeNode root) {
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/12/09/二叉树的创建与遍历/">二叉树的创建与遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/哈夫曼编码/">哈夫曼编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/17/Java杂记/">Java杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/11/数据库查询语句-select/">数据库查询语句-select</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/">Java Virtual Machine-自动内存管理机制（内存区域）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/08/数据库脚本操作/">数据库脚本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/07/数据库语句学习/">数据库语句学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/Linux-链接/">Linux-链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/Redis初学/">Redis初学</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/归并排序/">归并排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/插入排序/">插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/我的第一篇博客/">我的第一篇博客</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/12/09/二叉树的创建与遍历/">二叉树的创建与遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/哈夫曼编码/">哈夫曼编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/17/Java杂记/">Java杂记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/11/Java Virtual Machine-自动内存管理机制（内存区域）/">Java Virtual Machine-自动内存管理机制（内存区域）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/11/数据库查询语句-select/">数据库查询语句-select</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/08/数据库脚本操作/">数据库脚本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/07/数据库语句学习/">数据库语句学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/Linux-链接/">Linux-链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/Redis初学/">Redis初学</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/归并排序/">归并排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/插入排序/">插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/我的第一篇博客/">我的第一篇博客</a></li></ul>
     
 <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 
