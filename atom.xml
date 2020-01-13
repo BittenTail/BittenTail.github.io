@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-09T14:02:31.170Z</updated>
+  <updated>2020-01-13T11:37:37.616Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java类型信息</title>
+    <link href="http://yoursite.com/2020/01/13/Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/"/>
+    <id>http://yoursite.com/2020/01/13/Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/</id>
+    <published>2020-01-13T11:35:16.000Z</published>
+    <updated>2020-01-13T11:37:37.616Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="第十四章-类型信息"><a href="#第十四章-类型信息" class="headerlink" title="第十四章 类型信息"></a>第十四章 类型信息</h1><p> <strong>运行时类型信息使得你可以在程序运行时发现和使用类型信息</strong><br>它使你从只能在编译期执行面向类型的操作的禁锢中解脱了出来，并且可以使用某些非常强大的程序。对RTTI（Run-Time Type Identification——运行时类型识别）的需要，揭示了面向对象设计中许多有趣（并且复杂）的问题，同时也提出了如何组织程序得人问题。<br>Java是如何让我们在运行时识别对象和类的信息的。主要有两种方式：  </p><a id="more"></a><ol><li>一种是“传统的”RTTI，它假定我们在编译时已经知道了所有的类型；</li><li>另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。<h2 id="14-1-为什么需要RTTI"><a href="#14-1-为什么需要RTTI" class="headerlink" title="14.1 为什么需要RTTI"></a>14.1 为什么需要RTTI</h2><blockquote><p>插入代码，J-P-313  </p></blockquote></li></ol><p>在上述例子中，当把Shape对象放入List<shape>的数组时会向上转型。但在向上转型为Shape的时候也丢失了Shape对象的具体类型。对于数组而言，它们只是Shape类的对象。<br>当从数组中取回元素是，这种容器——实际上它将所有的事物都当做Object持有——会自动将结果转型会Shape。这是RTTI最基本的使用形式，因为在Java中，所有的类型转换都是在运行时进行正确性检查的。这也是RTTI名字的含义：在运行时，识别一个对象的类型。<br><strong>多态机制</strong>：你希望大部分代码尽可能少地了解对象的具体类型，而是只与对象家族中的一个通用表示打交道（上例中是基类Shape）。这样的代码会更容易编写，更容易读，且更便于维护；设计也更容易实现、理解和改变。<br>-》但是，假如你碰到一个特殊的编程问题——如果能够知道某个泛化引用的确切类型，就可以使用最简单的方式去解决它，那么此时该怎么办呢？假如：可能要用某个方法来旋转列出的所有图形，但想跳过圆形，因为对圆形旋转没有意义。<br>-》使用RTTI。可以查询某个Shape引用所指向的对象的确切类型，然后选择或者剔除特例。  </shape></p><h2 id="14-2-Class对象"><a href="#14-2-Class对象" class="headerlink" title="14.2 Class对象"></a>14.2 Class对象</h2><p>要理解RTTI在Java中的工作原理，首先必须知道<strong>类型信息在运行时是如何表示的</strong>。这项工作是由称为<strong>Class对象</strong> 的特殊对象完成的，它包含了与类有关的信息。事实上，<em>Class对象就是用来创建类的所有的“常规”对象的</em>。Java使用Class对象类执行其RTTI，即使你正在执行的是类似转型这样的操作。<strong>Class类</strong>还拥有大量的使用RTTI的其他方式。<br>==类是程序的一部分，每个类都有一个Class对象。==换言之，每当编写并且编译了一个新类，就会产生一个Class对象（更恰当地说，是被保存在一个同名的.class文件中）。为了生存这个类的对象，运行这个程序的Java虚拟机（JVM）将使用被称为“类加载器”的子系统。<br>类加载器子系统实际上可以包含一条类加载器链，但是只有一个 <strong>原生类加载器</strong>，它是JVM实现的一部分。原生类加载器加载的是所谓的 <em>可信类</em>，包括Java API类，它们通常是从本地盘加载的。在这条链中，通常不需要添加额外的类加载器，但是如果你有特殊需求（例如以某种特殊的方式加载类中，以支持Web服务器应用，或者在网络中下载类），那么你有一种方式可以挂接额外的类加载器。<br><strong>所有的类都是在对其第一次使用时，动态加载到JVM中的。</strong>当程序创建第一个对类的静态成员的引用是，就会加载这个类。这个证明构造器也是类的静态方法，即使在构造器之前并没有使用 <strong>static</strong> 关键字。因此，使用 <strong>new</strong> 操作符创建类的新对象也会被当做对类的静态成员的引用。<br>因此，Java程序在它开始运行之前并非被完全加载，其各个部分是在必需时才加载的。这一点与许多传统语言都不同。动态加载使能的行为，在诸如C++这样的静态加载语言中是很难或者根本不可能复制的。<br>类加载器首先检查这个类的Class对象是否已将加载。如果尚未加载，默认的类加载器就会根据类名查找.class文件（例如，某个附加类加载器可能会在数据库中查找字节码）。在这个类的字节码被加载时，它们会接收验证，以确保其没有被破坏，并且不包含不良Java代码（这是Java中用于安全防范目的的措施之一）。<br><strong>一旦某个类的Class对象被载入内存，它就被用来创建这个类的所有对象。</strong></p><blockquote><p>例子：代码，J-P-315</p></blockquote><p><code>Class.forName(&quot;全限定名&quot;)</code><br>这个方法是Class类（所有Class对象都属于这个类）的一个static成员。<br>Class对象就和其他对象一样，我们可以获取并操作它的引用（这也就是类加载器的工作）。forName()是取得Class对象的引用的一种方法。它是用一个包含目标类的文本名（注意拼写和大小写）的String做输入参数，返回的是一个Class对象的引用，上面的代码忽略了返回值。对forName()的调用是为了它产生的“副作用”：如果类X还没有被加载就加载它。<br>无论何时，只要你想在运行时使用类型信息，就必须首先获得对恰当的Class对象的引用。Class.forName()就是实现此功能的便捷途径，因为你不需要为了获得Class引用而持有该类型的对象。但是，如果你已经拥有了一个感兴趣的类型的对象，那就可以通过调用getClass()方法来获取Class引用了，这个方法属于根类Object的一部分，它将返回表示该对象的实际类型的Class引用。Class包含很多有用的方法，下面是其中的一部分：</p><blockquote><p>代码：J-P-316，317</p></blockquote><h3 id="14-2-1-类字面常量"><a href="#14-2-1-类字面常量" class="headerlink" title="14.2.1 类字面常量"></a>14.2.1 类字面常量</h3><p>Java还提供了另一种方法来生成对Class对象的引用，即使用 <strong>类字面常量</strong>。对上述代码来说，就像这样：<br><code>FancyToy.class</code><br>这样做不仅更简单，而且更加安全，因为它在编译时就会受到检查（因此不需要置于try语句块中）。并且它根除了对forName()方法的调用，所以也更高效。<br><strong>类字面常量不仅可以应用于普通的类，也可以应用于接口、数组以及基本数据类型。另外，对于基本数据类型的包装器类，还有一个标准字段TYPE。TYPE字段是一个引用，指向对应的基本数据类型的Class对象。<br>建议使用“.class”的形式，以保持与普通类的一致性。<br>**注意</strong>，有一点很有趣，当使用“.class”来创建对Class对象的引用时，不会自动地初始化该Class对象。为了使用类而做的准备工作实际包含三个步骤：   </p><ol><li>加载，这是由类加载器执行的。该步骤将查找字节码（通常在classpath所指定的路径中查找，但这并非是必需的），并从这些字节码中创建一个Class对象。  </li><li>链接。在链接节点将验证类中的字节码，为静态域分配存储空间，并且如果必需的话，将解析这个类创建的对其他类的所有引用。</li><li>初始化。如果该类具有超类，则对其初始化，执行静态初始化器和静态初始化块。<br>初始化被延迟到了对静态方法（构造器隐式地是静态的）或者非常数静态域进行首次引用时才执行：<blockquote><p>代码：J-P-319  </p></blockquote></li></ol><p>初始化有效地实现了尽可能的“<strong>惰性</strong>”。从对initable引用的创建中可以看到，仅使用.class语法来获得对类的引用不会引发初始化。但是，为了产生Class引用，Class.forName()立即就进行了初始化，就像在对initable3引用的创建中所看到的。如果一个<strong>static final</strong>值是“<strong>编译期常量</strong>”，就像Initable.staticFinal那样，那么这个值不需要对Initable类进行初始化就可以被读取。但是，如果只是将一个域设置为static和final的，还不足以确保这种行为，例如，对Initable.staticFinal2的访问将强制进行累的初始化，因为它不是一个编译期常量。<br>如果一个static域不是final的，那么在对它访问时，总是要求在它被读取之前，要先进行链接（为这个域分配存储空间）和初始化（初始化该存储空间），就像在对Initable2.staticNonFinal的访问中所看到的那样。</p><h3 id="14-2-2-泛化的Class引用"><a href="#14-2-2-泛化的Class引用" class="headerlink" title="14.2.2 泛化的Class引用"></a>14.2.2 泛化的Class引用</h3><p>Class引用总是指向某个Class对象，它可以制造类的实例，并包含可作用于这些实例的所有方法代码。它还包含该类的静态成员，因此，Class引用表示的就是它所指向的对象的确切类型，而该对象便是Class类的一个对象。</p><blockquote><p>代码：J-P-320</p></blockquote><p>普通的类引用不会产生警告信息，你可以看到，尽管泛型类引用只能赋值为指向其声明的类型，但是普通的类引用可以被重新赋值为指向任何其他的Class对象。通过使用泛型语法，可以让编译器强制执行额外的类型检测。如果你希望稍微放松一些这种限制，应该怎么办呢？乍一看，好像你应该能够执行类似下面这样的操作：<br><del>Class<number> genericNumberClass = int.class</number></del><br>这看起来似乎是起作用的，因为Integer继承自Number。但是它无法工作，因为Integer Class对象不是Number Class对象的<br>子类（这种差异看起来可能有些诡异，我们将在第15章中深入讨论它）。<br>为了<strong>使用泛化的Class引用时放松限制，可以使用通配符</strong>，它是Java泛型的一部分。通配符就是“？”，表示“任何事物”。<br>为了创建一个Class引用，它被限定为某种类型，或该类型的任何子类型，你需要将通配符与extends关键字向结合，创建一个<em>范围</em>。<br><code>Class&lt;? extends Number&gt;</code></p><blockquote><p>代码：J-P-321</p></blockquote><p><strong>向Class引用添加泛型语法的原因仅仅是为了提供编译期类型，因此如果你操作有误，稍后立即就会发现这一点。</strong>在使用普通Class引用，你不会误入歧途，但是如果你确实犯了错误，那么直到运行时你才会发现这一它，而这显得很不方便。</p><blockquote><p>代码：J-P-321（566）</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;第十四章-类型信息&quot;&gt;&lt;a href=&quot;#第十四章-类型信息&quot; class=&quot;headerlink&quot; title=&quot;第十四章 类型信息&quot;&gt;&lt;/a&gt;第十四章 类型信息&lt;/h1&gt;&lt;p&gt; &lt;strong&gt;运行时类型信息使得你可以在程序运行时发现和使用类型信息&lt;/strong&gt;&lt;br&gt;它使你从只能在编译期执行面向类型的操作的禁锢中解脱了出来，并且可以使用某些非常强大的程序。对RTTI（Run-Time Type Identification——运行时类型识别）的需要，揭示了面向对象设计中许多有趣（并且复杂）的问题，同时也提出了如何组织程序得人问题。&lt;br&gt;Java是如何让我们在运行时识别对象和类的信息的。主要有两种方式：  &lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Java编程思想" scheme="http://yoursite.com/tags/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
+    
+      <category term="类型信息" scheme="http://yoursite.com/tags/%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>二叉树的创建与遍历</title>
