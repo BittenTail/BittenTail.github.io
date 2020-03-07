@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-07T10:02:30.749Z</updated>
+  <updated>2020-03-07T10:04:19.820Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,13 +17,21 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Java面试知识点链接合集</title>
+    <title></title>
     <link href="http://yoursite.com/2020/03/07/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E9%93%BE%E6%8E%A5%E5%90%88%E9%9B%86/"/>
     <id>http://yoursite.com/2020/03/07/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E9%93%BE%E6%8E%A5%E5%90%88%E9%9B%86/</id>
-    <published>2020-03-07T10:02:30.000Z</published>
-    <updated>2020-03-07T10:02:30.749Z</updated>
+    <published>2020-03-07T10:02:30.746Z</published>
+    <updated>2020-03-07T10:04:19.820Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p>title: Java面试知识点链接合集<br>date: 2020-03-07 18:02:30<br>tags:</p><ul><li>学习笔记</li><li>链接合集<br>categories:</li><li>Java</li></ul><a id="more"></a><h1 id="Java面试总结归纳"><a href="#Java面试总结归纳" class="headerlink" title="Java面试总结归纳"></a>Java面试总结归纳</h1><h2 id="HashMap、HashTable和ConcurrentMap"><a href="#HashMap、HashTable和ConcurrentMap" class="headerlink" title="HashMap、HashTable和ConcurrentMap"></a>HashMap、HashTable和ConcurrentMap</h2><p> <a href="https://www.cnblogs.com/shan1393/p/8999458.html" target="_blank" rel="noopener">link</a><br> <a href="https://www.cnblogs.com/heyonggang/p/9112731.html" target="_blank" rel="noopener">link</a></p>]]></content>
     
     <summary type="html">
+    
+      &lt;hr&gt;&lt;p&gt;title: Java面试知识点链接合集&lt;br&gt;date: 2020-03-07 18:02:30&lt;br&gt;tags:&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;学习笔记&lt;/li&gt;
+&lt;li&gt;链接合集&lt;br&gt;categories:&lt;/li&gt;
+&lt;li&gt;Java&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -150,33 +158,6 @@
   </entry>
   
   <entry>
-    <title>Java Virtual Machine-自动内存管理机制（内存区域）</title>
-    <link href="http://yoursite.com/2019/11/11/Java%20Virtual%20Machine-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%EF%BC%88%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%EF%BC%89/"/>
-    <id>http://yoursite.com/2019/11/11/Java%20Virtual%20Machine-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%EF%BC%88%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%EF%BC%89/</id>
-    <published>2019-11-11T07:50:15.000Z</published>
-    <updated>2019-11-14T14:06:39.086Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为<strong>new</strong>的每一个对象都去写向对应的<strong>delect/free</strong>，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。</p><a id="more"></a><h1 id="Java运行时数据区"><a href="#Java运行时数据区" class="headerlink" title="Java运行时数据区"></a>Java运行时数据区</h1><table><thead><tr><th>由线程共享的数据区</th><th>线程隔离的数据区</th></tr></thead><tbody><tr><td>方法区（Method Area)</td><td>虚拟机栈（VM Stack）</td></tr><tr><td>堆（Heap）</td><td>本地方法栈（Native Method Stack）</td></tr><tr><td></td><td>程序计数器（Program Counter Register）</td></tr></tbody></table><h2 id="程序计数器（Program-Counter-Register）"><a href="#程序计数器（Program-Counter-Register）" class="headerlink" title="程序计数器（Program Counter Register）"></a>程序计数器（Program Counter Register）</h2><p><strong><em>线程私有的</em></strong>  </p><ul><li>定义：程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。</li><li>作用：由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式实现的，因此在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）都只会执行一条线程中的指令。所以为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，且各线程之间计数器互不影响，独立存储，我们称这片内存区域为“线程私有”的内存。</li><li>线程计数器：<br>线程正在执行一个Java方法—-》计数器记录的是正在执行的虚拟机字节码指令的地址。<br>线程正在执行一个Native方法–》计数器值为空（Undefined）  </li></ul><p><strong>注</strong>：此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</p><h2 id="Java虚拟机栈（Java-Virtual-Machine-Stack）"><a href="#Java虚拟机栈（Java-Virtual-Machine-Stack）" class="headerlink" title="Java虚拟机栈（Java Virtual Machine Stack）"></a>Java虚拟机栈（Java Virtual Machine Stack）</h2><p><strong><em>线程私有的</em></strong> </p><ul><li>生命周期与线程相同。</li><li>虚拟机栈描述的是Java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链、方法出口等信息。<br>每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</li><li>局部变量表：存放了编译期可知的各种基本数据类型（boolean、byte、short、int、long、float、double、char）、对象引用（reference类型，它不等同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。<br>其中64位长度的long和double类型的数据会占用两个局部变量空间（Slot），其余的数据类型只占用一个。</li><li>局部变量表所需的内存空间在编译期间完成分配，在方法运行期间不会改变局部变量表的大小。<br>PS：栈帧：是方法运行时的基础数据结构。  </li></ul><p><strong>注</strong>：会抛出StackOverflowError异常，如果扩展时无法申请到足够的内存，就会抛出会抛出OutOfMemoryError异常。</p><h2 id="本地方法栈（Native-Method-Stack）"><a href="#本地方法栈（Native-Method-Stack）" class="headerlink" title="本地方法栈（Native Method Stack）"></a>本地方法栈（Native Method Stack）</h2><p><strong><em>线程私有的</em></strong><br>本地方法栈所发挥的作用与虚拟机栈的作用非常相似。<br>两者之间的区别：  </p><ul><li>虚拟机栈：为虚拟机执行Java方法（也就是字节码）服务</li><li>本地方法栈：为虚拟机使用到的Native方法服务<br>虚拟机规范中并未对本地方法栈中方法使用的语言、使用方式与数据结构进行强制规定，因此具体的虚拟机可以自由实现它。  </li><li>如Sun HotSpot虚拟机直接将本地方法栈与虚拟机栈合二为一。  </li></ul><p><strong>注</strong>：与虚拟机栈一样，也会抛出StackOverflowError异常和OutOfMemoryError异常。</p><h2 id="Java堆（Java-Heap）"><a href="#Java堆（Java-Heap）" class="headerlink" title="Java堆（Java Heap）"></a>Java堆（Java Heap）</h2><p><strong><em>线程共享的</em></strong> </p><ul><li>是Java虚拟机所管理的内存中最大的一块，在虚拟机启动时创建。</li><li>唯一的目的就是存放对象实例，几乎所有的对象实例都在这里分配。<br>Java虚拟机规范中的描述：The heap is the runtime data area from which memory for all class instances and arrays is allocated.(所有的对象实例及数组都要在对上分配。）<br>不过随着JIT编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将会导致一些微妙的变化发生，所有的对象都分配在堆上也渐渐变得不是那么“绝对”了。</li><li>Java堆是垃圾收集器管理的主要区域，因此很多时候也被称作“GC堆”。</li><li>Java堆根据收集器所使用的的分代收集算法，还可进行分类，如新生代、老生代等。</li><li>Java堆可以处于物理上不连续的内存空间，只要逻辑上是连续的即可。  </li></ul><p><strong>注</strong>：如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError异常。</p><h2 id="方法区（Method-Area"><a href="#方法区（Method-Area" class="headerlink" title="方法区（Method Area)"></a>方法区（Method Area)</h2><p><strong><em>线程共享的</em></strong>  </p><ul><li>用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</li><li>虽然Java虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫做Non-Heap（非堆），目的应该是与Java堆区分开来。</li><li>垃圾收集较少，内存回收目标主要是针对常量池的回收和对类型的卸载。  </li><li><strong>注</strong>：当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。<h2 id="运行时常量池（Runtime-Constant-Pool）"><a href="#运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="运行时常量池（Runtime Constant Pool）"></a>运行时常量池（Runtime Constant Pool）</h2></li></ul><p><strong><em>方法区的一部分</em></strong>  </p><ul><li>Class文件中除了有类的版本、字段、方法、接口等描述信息外，还有一项信息是常量池（Constant Pool Table），用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后进入方法区的运行时常量池中存放。</li><li>具备动态性，运行期间也可能将新的常量放入池中，如String类的intern（）方法。  </li></ul><p><strong>注</strong>：当常量池无法再申请到内存时会抛出OutOfMemoryError异常。</p><h2 id="直接内存（Direct-Memory）"><a href="#直接内存（Direct-Memory）" class="headerlink" title="直接内存（Direct Memory）"></a>直接内存（Direct Memory）</h2><p><strong><em>并不是虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域</em></strong>  </p><ul><li>这部分内存也被频繁使用，并且也可能导致OutOfMemoryError异常。</li><li>不会受到Java堆大小的限制。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为&lt;strong&gt;new&lt;/strong&gt;的每一个对象都去写向对应的&lt;strong&gt;delect/free&lt;/strong&gt;，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="JVM" scheme="http://yoursite.com/categories/JVM/"/>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="JVM" scheme="http://yoursite.com/tags/JVM/"/>
-    
-      <category term="内存" scheme="http://yoursite.com/tags/%E5%86%85%E5%AD%98/"/>
-    
-  </entry>
-  
-  <entry>
     <title>数据库查询语句-select</title>
     <link href="http://yoursite.com/2019/11/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5-select/"/>
     <id>http://yoursite.com/2019/11/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5-select/</id>
@@ -202,6 +183,33 @@
       <category term="语法" scheme="http://yoursite.com/tags/%E8%AF%AD%E6%B3%95/"/>
     
       <category term="查询" scheme="http://yoursite.com/tags/%E6%9F%A5%E8%AF%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java Virtual Machine-自动内存管理机制（内存区域）</title>
+    <link href="http://yoursite.com/2019/11/11/Java%20Virtual%20Machine-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%EF%BC%88%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/11/11/Java%20Virtual%20Machine-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%EF%BC%88%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%EF%BC%89/</id>
+    <published>2019-11-11T07:50:15.000Z</published>
+    <updated>2019-11-14T14:06:39.086Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为<strong>new</strong>的每一个对象都去写向对应的<strong>delect/free</strong>，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。</p><a id="more"></a><h1 id="Java运行时数据区"><a href="#Java运行时数据区" class="headerlink" title="Java运行时数据区"></a>Java运行时数据区</h1><table><thead><tr><th>由线程共享的数据区</th><th>线程隔离的数据区</th></tr></thead><tbody><tr><td>方法区（Method Area)</td><td>虚拟机栈（VM Stack）</td></tr><tr><td>堆（Heap）</td><td>本地方法栈（Native Method Stack）</td></tr><tr><td></td><td>程序计数器（Program Counter Register）</td></tr></tbody></table><h2 id="程序计数器（Program-Counter-Register）"><a href="#程序计数器（Program-Counter-Register）" class="headerlink" title="程序计数器（Program Counter Register）"></a>程序计数器（Program Counter Register）</h2><p><strong><em>线程私有的</em></strong>  </p><ul><li>定义：程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。</li><li>作用：由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式实现的，因此在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）都只会执行一条线程中的指令。所以为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，且各线程之间计数器互不影响，独立存储，我们称这片内存区域为“线程私有”的内存。</li><li>线程计数器：<br>线程正在执行一个Java方法—-》计数器记录的是正在执行的虚拟机字节码指令的地址。<br>线程正在执行一个Native方法–》计数器值为空（Undefined）  </li></ul><p><strong>注</strong>：此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</p><h2 id="Java虚拟机栈（Java-Virtual-Machine-Stack）"><a href="#Java虚拟机栈（Java-Virtual-Machine-Stack）" class="headerlink" title="Java虚拟机栈（Java Virtual Machine Stack）"></a>Java虚拟机栈（Java Virtual Machine Stack）</h2><p><strong><em>线程私有的</em></strong> </p><ul><li>生命周期与线程相同。</li><li>虚拟机栈描述的是Java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链、方法出口等信息。<br>每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</li><li>局部变量表：存放了编译期可知的各种基本数据类型（boolean、byte、short、int、long、float、double、char）、对象引用（reference类型，它不等同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。<br>其中64位长度的long和double类型的数据会占用两个局部变量空间（Slot），其余的数据类型只占用一个。</li><li>局部变量表所需的内存空间在编译期间完成分配，在方法运行期间不会改变局部变量表的大小。<br>PS：栈帧：是方法运行时的基础数据结构。  </li></ul><p><strong>注</strong>：会抛出StackOverflowError异常，如果扩展时无法申请到足够的内存，就会抛出会抛出OutOfMemoryError异常。</p><h2 id="本地方法栈（Native-Method-Stack）"><a href="#本地方法栈（Native-Method-Stack）" class="headerlink" title="本地方法栈（Native Method Stack）"></a>本地方法栈（Native Method Stack）</h2><p><strong><em>线程私有的</em></strong><br>本地方法栈所发挥的作用与虚拟机栈的作用非常相似。<br>两者之间的区别：  </p><ul><li>虚拟机栈：为虚拟机执行Java方法（也就是字节码）服务</li><li>本地方法栈：为虚拟机使用到的Native方法服务<br>虚拟机规范中并未对本地方法栈中方法使用的语言、使用方式与数据结构进行强制规定，因此具体的虚拟机可以自由实现它。  </li><li>如Sun HotSpot虚拟机直接将本地方法栈与虚拟机栈合二为一。  </li></ul><p><strong>注</strong>：与虚拟机栈一样，也会抛出StackOverflowError异常和OutOfMemoryError异常。</p><h2 id="Java堆（Java-Heap）"><a href="#Java堆（Java-Heap）" class="headerlink" title="Java堆（Java Heap）"></a>Java堆（Java Heap）</h2><p><strong><em>线程共享的</em></strong> </p><ul><li>是Java虚拟机所管理的内存中最大的一块，在虚拟机启动时创建。</li><li>唯一的目的就是存放对象实例，几乎所有的对象实例都在这里分配。<br>Java虚拟机规范中的描述：The heap is the runtime data area from which memory for all class instances and arrays is allocated.(所有的对象实例及数组都要在对上分配。）<br>不过随着JIT编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将会导致一些微妙的变化发生，所有的对象都分配在堆上也渐渐变得不是那么“绝对”了。</li><li>Java堆是垃圾收集器管理的主要区域，因此很多时候也被称作“GC堆”。</li><li>Java堆根据收集器所使用的的分代收集算法，还可进行分类，如新生代、老生代等。</li><li>Java堆可以处于物理上不连续的内存空间，只要逻辑上是连续的即可。  </li></ul><p><strong>注</strong>：如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError异常。</p><h2 id="方法区（Method-Area"><a href="#方法区（Method-Area" class="headerlink" title="方法区（Method Area)"></a>方法区（Method Area)</h2><p><strong><em>线程共享的</em></strong>  </p><ul><li>用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</li><li>虽然Java虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫做Non-Heap（非堆），目的应该是与Java堆区分开来。</li><li>垃圾收集较少，内存回收目标主要是针对常量池的回收和对类型的卸载。  </li><li><strong>注</strong>：当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。<h2 id="运行时常量池（Runtime-Constant-Pool）"><a href="#运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="运行时常量池（Runtime Constant Pool）"></a>运行时常量池（Runtime Constant Pool）</h2></li></ul><p><strong><em>方法区的一部分</em></strong>  </p><ul><li>Class文件中除了有类的版本、字段、方法、接口等描述信息外，还有一项信息是常量池（Constant Pool Table），用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后进入方法区的运行时常量池中存放。</li><li>具备动态性，运行期间也可能将新的常量放入池中，如String类的intern（）方法。  </li></ul><p><strong>注</strong>：当常量池无法再申请到内存时会抛出OutOfMemoryError异常。</p><h2 id="直接内存（Direct-Memory）"><a href="#直接内存（Direct-Memory）" class="headerlink" title="直接内存（Direct Memory）"></a>直接内存（Direct Memory）</h2><p><strong><em>并不是虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域</em></strong>  </p><ul><li>这部分内存也被频繁使用，并且也可能导致OutOfMemoryError异常。</li><li>不会受到Java堆大小的限制。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;与C/C++不同，Java拥有虚拟机自动内存管理机制，不需要为&lt;strong&gt;new&lt;/strong&gt;的每一个对象都去写向对应的&lt;strong&gt;delect/free&lt;/strong&gt;，从而不容易出现内存泄露和内存溢出问题。不过，也因Java程序员将内存控制的权利交给了Java虚拟机，一旦出现内存泄露和溢出的问题，如果不了解虚拟机是如何使用内存的，那么将很难排查错误。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JVM" scheme="http://yoursite.com/categories/JVM/"/>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="JVM" scheme="http://yoursite.com/tags/JVM/"/>
+    
+      <category term="内存" scheme="http://yoursite.com/tags/%E5%86%85%E5%AD%98/"/>
     
   </entry>
   
